@@ -9,19 +9,21 @@ package mvc
 
 		public static const OXEGEN_AMOUNT:String = 'Oxegen_Amount';
 
-		public var valueObject:Object = new Object();
-		
+		//public var valueObject:Object = new Object();
+		private var _oxegenAmout:Number;
 
 		public function Model()
 		{
 		}
 	
 		public function setOxegnAmout(Ox:Number):void{
-			valueObject[OXEGEN_AMOUNT] = Ox;
+			_oxegenAmout = Ox;
 			dispatchEvent(new Event(OXEGEN_AMOUNT));
 		}
 
 
-
-	}
+        public function get oxegenAmout():Number {
+            return _oxegenAmout;
+        }
+    }
 }

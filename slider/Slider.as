@@ -8,8 +8,12 @@ package slider
     import flash.events.MouseEvent;
     import flash.text.TextField;
 	import flash.text.TextFormat;
+    import flash.events.Event;
+	import flash.events.EventDispatcher;
 	
 	public class Slider extends MovieClip{
+
+    public static const SLIDER_CHANGE:String = 'Slider Change';
 	
 	private var _thumb:MovieClip;
 	private var _track:MovieClip;
@@ -69,30 +73,30 @@ package slider
 		{
 			if(isDragging)
 			{
+
+                dispatchEvent(new Event(SLIDER_CHANGE));
 				lastX = currentX;
 				currentX = mouseX;
 				vx = currentX - lastX;
 			}	
 			else
 			{
-				_thumb.x += vx;
+			//	_thumb.x += vx;
 			}
 			
 			if(_thumb.x <= _boundsLeft)
 			{
 				_thumb.x  = _boundsLeft;
-				vx *= -1;
+			//	vx *= -1;
 			}
 			else if(_thumb.x >= _boundsRight)
 			{
 				_thumb.x = _boundsRight;
-				vx *= -1;
+			//	vx *= -1;
 			}
 			
-			vx *= 0.95;
-			if(Math.abs(vx) < 0.5) vx = 0;
-
-             //trace(_boundsLeft);
+		//	vx *= 0.95;
+		//	if(Math.abs(vx) < 0.5) vx = 0;
 
 			_svalue = Math.round((_thumb.x-_boundsLeft)/(_boundsRight-_boundsLeft)*100);
 

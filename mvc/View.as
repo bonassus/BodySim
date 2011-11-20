@@ -11,6 +11,7 @@ package mvc
 	{
 		private var _model:Model;
 		private var _controller:Controller;
+        var slider1:Slider;
 
 		public function View(model:Model, controller:Controller)
 		{
@@ -33,7 +34,7 @@ package mvc
 			
 
 		private function currOxegenAmoutHandler(eve:Event):void{
-			trace(_model.valueObject[Model.OXEGEN_AMOUNT]);
+			trace(_model.oxegenAmout +" from model");
 		}
 		
 
@@ -43,16 +44,23 @@ package mvc
              var track1:Track = new Track();
 
 			
-			var slider1:Slider = new Slider(thumb1, track1, 0, 349);
+			slider1 = new Slider(thumb1, track1, 0, 349);
             slider1.x = 300;
             slider1.y = 300;
 			addChild(slider1);
+            slider1.addEventListener(Slider.SLIDER_CHANGE, slider1ChangeHandler);
+
 
            // trace(slider1.svalue);
-            sliderPercent
+          //  sliderPercent
 
 		}
-		
+
+
+        function slider1ChangeHandler(eve:Event){
+                _controller.sliderAmout = slider1.svalue;
+
+        }
 
 	}
 }
