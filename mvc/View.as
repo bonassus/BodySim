@@ -26,8 +26,8 @@ package mvc
 		}
 		
 
-
-		private function initModelEventListeners():void{
+              zxcvzxcvzxcvzxcvzxcvzxcvzxcv
+		public function initModelEventListeners():void{
 			_model.addEventListener(Model.OXEGEN_AMOUNT, currOxegenAmoutHandler);
 		}
 			
