@@ -44,7 +44,7 @@ package view
         }
 
          private function setText(_theText){
-               textFormat.font = "Helvetica";
+             textFormat.font = "Helvetica";
 			textFormat.size = _textSize;
 			textFormat.bold = _ifBold;
             textFormat.color =_theColor;
