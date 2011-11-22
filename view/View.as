@@ -31,6 +31,7 @@ import flash.text.TextFormat;
         private var cO2_4:CO2_4 = new CO2_4;
         private var cO2_5:CO2_5 = new CO2_5;
         private var cO2_6:CO2_6 = new CO2_6;
+        private var breath:BreathAni = new BreathAni;
         private var lungBtn:LungBtn = new LungBtn;
         private var oxText:TextDisplay = new TextDisplay("0x000000",true,20);
         private var oxText2:TextDisplay = new TextDisplay("0xffffff",true,20);
