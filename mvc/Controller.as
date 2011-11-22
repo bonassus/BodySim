@@ -33,7 +33,7 @@ package mvc
 
 
         public function set sliderAmout(value:Number):void {
-            _sliderAmout = Math.floor(value / 10);
+            _sliderAmout = Math.floor(value / 20);
             _model.setOxegnAmout(_sliderAmout);
 
 

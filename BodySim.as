@@ -2,9 +2,12 @@
 package {
 
 	import flash.display.MovieClip;
-	//import flash.display.Sprite;
+import flash.events.Event;
+import flash.events.MouseEvent;
+
+//import flash.display.Sprite;
 	import mvc.Model;
-	import mvc.View;
+	import view.View;
 	import mvc.Controller;
 	
 	
@@ -32,6 +35,9 @@ package {
 			this.addChild(_view);
 			
 
+
+
 		}
+
 	}
 }

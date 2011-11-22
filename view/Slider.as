@@ -1,6 +1,6 @@
 
 
-package slider
+package view
 {
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
@@ -30,8 +30,8 @@ package slider
 			super();
 			_thumb = thumb;
 			_track = track;
-            _boundsLeft = left;
-            _boundsRight = right;
+            _boundsLeft = right;
+            _boundsRight = left;
 			currentX = _thumb.x;
 			lastX = _thumb.x;
 			init();
@@ -62,9 +62,9 @@ package slider
 		function onMove(e:MouseEvent):void
 		{
 			_thumb.x = mouseX - offset;
-			if(_thumb.x <= _boundsLeft)
+			if(_thumb.x >= _boundsLeft)
 				_thumb.x = _boundsLeft;
-			else if(_thumb.x >= _boundsRight)
+			else if(_thumb.x <= _boundsRight)
 				_thumb.x = _boundsRight;
 			e.updateAfterEvent();
 		}
@@ -84,12 +84,12 @@ package slider
 			//	_thumb.x += vx;
 			}
 			
-			if(_thumb.x <= _boundsLeft)
+			if(_thumb.x >= _boundsLeft)
 			{
 				_thumb.x  = _boundsLeft;
 			//	vx *= -1;
 			}
-			else if(_thumb.x >= _boundsRight)
+			else if(_thumb.x <= _boundsRight)
 			{
 				_thumb.x = _boundsRight;
 			//	vx *= -1;
