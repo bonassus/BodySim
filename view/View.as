@@ -31,7 +31,7 @@ import flash.text.TextFormat;
         private var cO2_4:CO2_4 = new CO2_4;
         private var cO2_5:CO2_5 = new CO2_5;
         private var cO2_6:CO2_6 = new CO2_6;
-        private var breath:BreathAni = new BreathAni;
+        private var breathAni:BreathAni = new BreathAni;
         private var lungBtn:LungBtn = new LungBtn;
         private var oxText:TextDisplay = new TextDisplay("0x000000",true,20);
         private var oxText2:TextDisplay = new TextDisplay("0xffffff",true,20);
@@ -144,9 +144,9 @@ import flash.text.TextFormat;
 
 
         function onLungInvis(eve:Event){
-         addChild(lungBack);
-         addChild(slider1);
-         addChild(oxText3);
+        addChild(lungBack);
+        addChild(slider1);
+        addChild(oxText3);
         TweenLite.to(oxText3, 1, {alpha:1, ease:Circ.easeOut});
         TweenLite.to(lungBack, 1, {alpha:1, ease:Circ.easeOut});
         TweenLite.to(slider1, 1.2, {alpha:1, ease:Circ.easeOut});
@@ -157,8 +157,8 @@ import flash.text.TextFormat;
          removeChild(lungBack);
          removeChild(slider1);
          removeChild(oxText3);
-        // TweenLite.to(slider1, 1, {alpha:0, ease:Circ.easeOut});
-       //  TweenLite.to(lungBack, 1, {alpha:0, ease:Circ.easeOut});
+         //TweenLite.to(slider1, 1, {alpha:0, ease:Circ.easeOut});
+         //TweenLite.to(lungBack, 1, {alpha:0, ease:Circ.easeOut});
          lungBack.removeEventListener(MouseEvent.CLICK, onlungBack)
          }
 
@@ -332,6 +332,9 @@ import flash.text.TextFormat;
             oxegenAni.x = 645
             oxegenAni.y =  379
 
+            breathAni.x = oxegenAni.x;
+            breathAni.y = oxegenAni.y;
+
             ox1.x = oxegenAni.x;
             ox2.x = oxegenAni.x;
             ox3.x = oxegenAni.x;
@@ -359,6 +362,7 @@ import flash.text.TextFormat;
             cO2_6.y  = oxegenAni.y;
 
             addChild(oxegenAni);
+            addChild(breathAni);
 
             addChild(ox1);
             addChild(ox2);
