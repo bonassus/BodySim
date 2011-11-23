@@ -25,12 +25,28 @@ import flash.text.TextFormat;
         private var ox3:Ox3 = new Ox3;
         private var ox4:Ox4 = new Ox4;
         private var ox5:Ox5 = new Ox5;
+        private var oxArray = [ox1,ox2,ox3,ox4,ox5];
+
         private var cO2_1:CO2_1 = new CO2_1;
         private var cO2_2:CO2_2 = new CO2_2;
         private var cO2_3:CO2_3 = new CO2_3;
         private var cO2_4:CO2_4 = new CO2_4;
         private var cO2_5:CO2_5 = new CO2_5;
         private var cO2_6:CO2_6 = new CO2_6;
+
+        private var cO2Array = [cO2_1,cO2_2,cO2_3,cO2_4,cO2_5,cO2_6];
+
+       private var cO2_1inLung:CO2_1inLung = new CO2_1inLung;
+       private var cO2inLung2:CO2_2inLung = new CO2_2inLung;
+       private var cO2_3inLung:CO2_3inLung = new CO2_3inLung;
+       private var cO2_4inLung:CO2_4inLung = new CO2_4inLung;
+       private var cO2_5inLung:CO2_5inLung = new CO2_5inLung;
+       private var cO2_6inLung:CO2_6inLung = new CO2_6inLung;
+
+
+        private var cO2_2LeavingLungs2:CO2_2LeavingLungs = new CO2_2LeavingLungs;
+
+
         private var breathAni:BreathAni = new BreathAni;
         private var lungBtn:LungBtn = new LungBtn;
         private var oxText:TextDisplay = new TextDisplay("0x000000",true,20);
@@ -40,6 +56,12 @@ import flash.text.TextFormat;
         private var co2Text:TextDisplay = new TextDisplay("0x909090",true,21);
         private var oxLabel:TextDisplay = new TextDisplay("0x333333",true,16);
         private var co2Label:TextDisplay = new TextDisplay("0x333333",true,16);
+
+        private var  oxegenAniStopped:Boolean = true;
+        private var  co2InLungs:Boolean = false;
+        private var  co2EndOfLoop:Boolean = false;
+         private var  BreathInLungs:Boolean = false;
+
        // private var OxLabel:TextField = new TextField();
         private var theOxegenAmout:Number ;
         private var oxDisplayNumber:String= "100";
@@ -335,31 +357,24 @@ import flash.text.TextFormat;
             breathAni.x = oxegenAni.x;
             breathAni.y = oxegenAni.y;
 
-            ox1.x = oxegenAni.x;
-            ox2.x = oxegenAni.x;
-            ox3.x = oxegenAni.x;
-            ox4.x = oxegenAni.x;
-            ox5.x = oxegenAni.x;
+            for(var i = 0; i<5; i++){
+             oxArray[i].x = oxegenAni.x
+             oxArray[i].y = oxegenAni.y;
+            }
 
-            ox1.y = oxegenAni.y;
-            ox2.y = oxegenAni.y;
-            ox3.y = oxegenAni.y;
+             for(var i = 0; i<6; i++){
+            cO2Array[i].x  = oxegenAni.x;
+            cO2Array[i].y  = oxegenAni.y;
+            }
 
-            ox4.y = oxegenAni.y;
-            ox5.y = oxegenAni.y;
+            cO2inLung2.x = cO2_2.x;
+            cO2_1inLung.y = cO2_1.y;
+            cO2inLung2.x = cO2_2.x;
+            cO2_1inLung.y = cO2_1.y;
 
-            cO2_1.x  = oxegenAni.x;
-            cO2_1.y  = oxegenAni.y;
-            cO2_2.x  = oxegenAni.x;
-            cO2_2.y  = oxegenAni.y;
-            cO2_3.x  = oxegenAni.x;
-            cO2_3.y  = oxegenAni.y;
-            cO2_4.x  = oxegenAni.x;
-            cO2_4.y  = oxegenAni.y;
-            cO2_5.x  = oxegenAni.x;
-            cO2_5.y  = oxegenAni.y;
-            cO2_6.x  = oxegenAni.x;
-            cO2_6.y  = oxegenAni.y;
+            cO2_2LeavingLungs2.x = cO2_2.x;
+            cO2_2LeavingLungs2.y = cO2_2.y;
+
 
             addChild(oxegenAni);
             addChild(breathAni);
@@ -370,17 +385,137 @@ import flash.text.TextFormat;
             addChild(ox4);
             addChild(ox5);
 
-            addChild(cO2_1);
-            addChild(cO2_2);
-            addChild(cO2_3);
-            addChild(cO2_4);
-            addChild(cO2_5);
-            addChild(cO2_6);
+           // addChild(cO2_1);
+          addChild(cO2_2);
+//           addChild(cO2_3);
+//           addChild(cO2_4);
+//           addChild(cO2_5);
+//           addChild(cO2_6);
+            cO2inLung2.visible = false;
+           addChild(cO2inLung2);
 
-//
+            cO2_2LeavingLungs2.visible = false;
+            addChild(cO2_2LeavingLungs2);
+
+
+     breathAni.addEventListener("airIn", ariIn);
+     breathAni.addEventListener("BreathIn",  BreathIn);
+     breathAni.addEventListener("BreathOut",  BreathOut);
+
+     oxegenAni.addEventListener("stopped", oxAbsorbStopped);
+     oxegenAni.addEventListener("playing", oxAbsorbPlaying);
+
+          //  cO2_2.addEventListener("co2InLungs", co2InLungsTrue);
+           // cO2_2.addEventListener("co2OutOfLungs", co2InLungsFalse);
+            cO2_2.addEventListener("end", co2end);
+            cO2inLung2.addEventListener("end", cO2_2inLungEnd);
+            cO2_2LeavingLungs2.addEventListener("end", cO2_2LeavingEnd);
+
 
 
         }
+
+        function BreathIn(e:Event){
+            trace(" BreathInLungs = true;")
+               BreathInLungs = true;
+               }
+
+         function BreathOut(e:Event){
+              trace(" BreathInLungs = false;")
+                BreathInLungs = false;
+               }
+
+
+        function co2end(e:Event){
+            co2InLungs = true ;
+
+
+            cO2_2.visible = false;
+
+            cO2inLung2.visible = true;
+            cO2inLung2.play();
+
+
+        }
+
+
+
+
+
+           function cO2_2inLungEnd(e:Event){
+
+             trace(BreathInLungs);
+             if(BreathInLungs == true){
+                 trace("yep");
+                 cO2inLung2.visible = false;
+                 cO2inLung2.gotoAndStop("first");
+                 cO2_2LeavingLungs2.visible = true;
+                cO2_2LeavingLungs2.play();
+
+             }
+        }
+
+
+         function cO2_2LeavingEnd(e:Event){
+                cO2_2LeavingLungs2.visible = false;
+         }
+
+
+
+        function ariIn(e:Event){
+
+            trace("ariIn");
+
+             if (oxegenAniStopped == true){
+
+               oxegenAni.gotoAndPlay("one");
+               ox1.gotoAndPlay("one");
+               ox2.gotoAndPlay("one");
+               ox3.gotoAndPlay("one");
+               ox4.gotoAndPlay("one");
+               ox5.gotoAndPlay("one");
+             }
+
+            if(co2InLungs == true){
+
+
+
+              //cO2_1.gotoAndPlay("resume");
+            }
+
+
+        }
+
+        function oxAbsorbStopped(e:Event){
+             oxegenAniStopped = true;
+//            if(co2InLungs == false){
+//                cO2_2.gotoAndPlay("one");
+//                cO2_2.visible = true;
+//            }
+
+             cO2_2.gotoAndPlay("one");
+            cO2_2.visible = true;
+//             cO2_3.gotoAndPlay("one");
+//             cO2_4.gotoAndPlay("one");
+//             cO2_5.gotoAndPlay("one");
+//             cO2_6.gotoAndPlay("one");
+
+
+        }
+         function oxAbsorbPlaying(e:Event){
+             oxegenAniStopped = false;
+        }
+
+
+//         function co2InLungsTrue(e:Event){
+//         co2InLungs = true ;
+//         trace("in");
+//        }
+//         function co2InLungsFalse(e:Event){
+//         co2InLungs = false ;
+//
+//         trace("out");
+//        }
 
 		private function initSliders():void{
 
