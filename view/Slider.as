@@ -109,5 +109,13 @@ package view
         public function get svalue():Number {
             return _svalue;
         }
+
+        public function get boundsLeft():Number {
+            return _boundsLeft;
+        }
+
+        public function set boundsLeft(value:Number):void {
+            _boundsLeft = value;
+        }
     }
 }

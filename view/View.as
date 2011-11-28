@@ -7,6 +7,7 @@ import flash.text.TextFormat;
 	import mvc.Controller;
 	import flash.display.*;
 	import flash.events.*;
+
 	import flash.net.URLRequest;
     import com.greensock.*;
 	import com.greensock.easing.*;
@@ -17,6 +18,7 @@ import flash.text.TextFormat;
 		private var _controller:Controller;
         private var resp:Resp;
         private var lungBtn:LungBtn
+        private var foodBtn:FoodBtn;
 
 
 		public function View(model:Model, controller:Controller)
@@ -26,6 +28,7 @@ import flash.text.TextFormat;
 
             resp = new Resp(model,controller);
             lungBtn = new LungBtn(model,controller);
+            foodBtn = new FoodBtn(model,controller);
 			init();
 		}
 		
@@ -41,6 +44,7 @@ import flash.text.TextFormat;
         private function creation (){
           addChild(resp);
           addChild(lungBtn);
+          addChild(foodBtn);
 
        }
 
