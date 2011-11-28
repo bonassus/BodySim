@@ -10,9 +10,8 @@ import mvc.Controller;
 public class Resp extends MovieClip {
        private var _model:Model;
        private var _controller:Controller;
-
-     private var ox1:Ox1 = new Ox1;
-      private var ox2:Ox2 = new Ox2;
+       private var ox1:Ox1 = new Ox1;
+       private var ox2:Ox2 = new Ox2;
        private var ox3:Ox3 = new Ox3;
        private var ox4:Ox4 = new Ox4;
        private var ox5:Ox5 = new Ox5;
@@ -46,15 +45,11 @@ public class Resp extends MovieClip {
        private var  co2InLungs:Boolean = false;
        private var  co2EndOfLoop:Boolean = false;
        private var  BreathInLungs:Boolean = false;
+       private var theOxegenAmout:Number  = 5;
 
-    private var theOxegenAmout:Number  = 5;
-        //private var oxDisplayNumber:String= "100";
-
-		public function Resp(model:Model, controller:Controller){
-
+	public function Resp(model:Model, controller:Controller){
             _model = model;
             _controller = controller;
-
             init();
 		}
 
@@ -299,27 +294,6 @@ public class Resp extends MovieClip {
               case 0:
 
               break;
-
-              case 1:
-
-              break;
-
-              case 2:
-
-              break;
-
-              case 3:
-
-              break;
-
-              case 4:
-
-              break;
-
-              case 5:
-
-              break;
-
 
               default:
 
