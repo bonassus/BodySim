@@ -19,7 +19,8 @@ import flash.text.TextFormat;
         private var resp:Resp;
         private var lungBtn:LungBtn
         private var foodBtn:FoodBtn;
-
+        private var bodySimBG:BodySimBG = new BodySimBG;
+        private var gis:Gis;
 
 		public function View(model:Model, controller:Controller)
 		{
@@ -29,6 +30,7 @@ import flash.text.TextFormat;
             resp = new Resp(model,controller);
             lungBtn = new LungBtn(model,controller);
             foodBtn = new FoodBtn(model,controller);
+            gis = new Gis(model,controller);
 			init();
 		}
 		
@@ -42,9 +44,11 @@ import flash.text.TextFormat;
 		}
 
         private function creation (){
+          addChild(bodySimBG);
           addChild(resp);
           addChild(lungBtn);
           addChild(foodBtn);
+          addChild(gis);
 
        }
 

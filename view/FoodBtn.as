@@ -9,19 +9,13 @@ import mvc.Controller;
 import com.greensock.plugins.TweenPlugin;
 import com.greensock.plugins.ColorTransformPlugin;
 
-
-
-
-
 public class FoodBtn extends MovieClip {
-
+     //    public static const SLIDER_END:String = 'Slider End';
        private var _model:Model;
        private var _controller:Controller;
-       private var foodSlider:Slider;
        private var foodSliderBack:FoodSliderBack = new FoodSliderBack;
        private var apple:Apple = new Apple;
        private var track:FoodTrack = new FoodTrack;
-       private var foodSliderAmount:Number;
 		public function FoodBtn(model:Model, controller:Controller) {
 			_model = model;
             _controller = controller;
@@ -41,32 +35,37 @@ public class FoodBtn extends MovieClip {
           foodSliderBack.y  = 36;
           addChild(foodSliderBack);
 
-           foodSlider = new Slider(apple,track,15, 175);
-           foodSlider.x = 1000;
-           foodSlider.y = 80;
-           foodSlider.alpha = 1;
-           addChild(foodSlider);
-          foodSlider.addEventListener(Slider.SLIDER_CHANGE, slider1ChangeHandler)
+
+           track.x = 1000;
+           track.y = 80;
+           addChild(track);
+
+           apple.x = 1000;
+           apple.y = 80;
+           addChild(apple);
+           apple.addEventListener(MouseEvent.CLICK, onApple);
         }
 
-         function slider1ChangeHandler(eve:Event){
+         function onApple(e:MouseEvent){
+           TweenLite.to(apple,1.5,{x:1170, colorTransform:{tint:0xFF0000, tintAmount:.5},ease:Quad.easeInOut,onComplete:appleEnd});
+         }
 
-                    // 10 - sliderValue
-             foodSliderAmount =int((foodSlider.svalue * .01)*10)/10;
-             trace(1 -foodSliderAmount);
-               // _controller.sliderAmout = foodSlider.svalue;
+    function appleEnd(){
+        _controller.feedApple();
+       // dispatchEvent(new Event(SLIDER_END));
+        apple.removeEventListener(MouseEvent.CLICK, onApple);
+        TweenLite.to(apple,.5,{alpha:0,ease:Quad.easeInOut,delay:3,onComplete:onAppleOut});
+    }
 
-             TweenLite.to(apple, 0, {colorTransform:{tint:0xFF0000, tintAmount:(1 - foodSliderAmount)-.4}});
+    function onAppleOut(){
+        TweenLite.to(apple,0,{x:1000, colorTransform:{tint:0xFF0000, tintAmount:0},ease:Quad.easeInOut,onComplete:onAppleBack});
+    }
 
-             if(foodSliderAmount<=.5){
+    function onAppleBack(){
+        apple.addEventListener(MouseEvent.CLICK, onApple);
+       TweenLite.to(apple,1,{alpha:1,ease:Quad.easeInOut});
+    }
 
-                 TweenLite.to(foodSlider.thumb, .4, {x:foodSlider.boundsLeft});
-                  //foodSlider.thumb.x = foodSlider.boundsLeft;
-               //   trace("less then two");
-             }
-
-        }
-
-	}
+}
 	
 }

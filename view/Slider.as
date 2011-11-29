@@ -114,6 +114,14 @@ package view
             return _boundsLeft;
         }
 
+        public function get thumb():MovieClip {
+            return _thumb;
+        }
+
+        public function set thumb(value:MovieClip):void {
+            _thumb = value;
+        }
+
         public function set boundsLeft(value:Number):void {
             _boundsLeft = value;
         }
