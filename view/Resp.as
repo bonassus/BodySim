@@ -64,144 +64,7 @@ public class Resp extends MovieClip {
 		}
 
     private function currOxegenAmoutHandler(eve:Event):void{
-
              theOxegenAmout = _model.oxegenAmout;
-
-            switch(theOxegenAmout){
-
-              case 0:
-               ox1.alpha = 0;
-               ox2.alpha = 0;
-               ox3.alpha = 0;
-               ox4.alpha = 0;
-               ox5.alpha = 0;
-
-
-            for(var j = 0; j<3; j++){
-             cO2inLungArray[j].alpha = 0;
-             cO2Array[j].alpha = 0;
-              cO2LeavingLungArray[j].alpha = 0;
-            }
-            for(var i = 3; i<6; i++){
-            cO2inLungArray[i].alpha = 1;
-            cO2Array[i].alpha = 1;
-
-             cO2LeavingLungArray[j].alpha = 1;
-            }
-
-             break;
-
-             case 1:
-               ox1.alpha = 0;
-               ox2.alpha = 0;
-               ox3.alpha = 0;
-               ox4.alpha = 0;
-               ox5.alpha = 1;
-
-             for(var k = 0; k<3; k++){
-             cO2inLungArray[k].alpha = 0;
-             cO2Array[k].alpha = 0;
-              cO2LeavingLungArray[k].alpha = 0;
-            }
-            for(var l = 3; l<6; l++){
-            cO2inLungArray[l].alpha = 1;
-            cO2Array[l].alpha = 1;
-             cO2LeavingLungArray[l].alpha = 1;
-            }
-
-             break;
-
-             case 2:
-              ox1.alpha = 0;
-              ox2.alpha = 0;
-              ox3.alpha = 0;
-              ox4.alpha = 1;
-              ox5.alpha = 1;
-
-           for(var m = 0; m<2; m++){
-             cO2inLungArray[m].alpha = 0;
-             cO2Array[m].alpha = 0;
-              cO2LeavingLungArray[m].alpha = 0;
-            }
-            for(var n = 2; n<6; n++){
-            cO2inLungArray[n].alpha = 1;
-            cO2Array[n].alpha = 1;
-             cO2LeavingLungArray[n].alpha = 1;
-            }
-
-
-            break;
-
-            case 3:
-              ox1.alpha = 0;
-              ox2.alpha = 0;
-              ox3.alpha = 1;
-              ox4.alpha = 1;
-              ox5.alpha = 1;
-
-            for(var o = 0; o<2; o++){
-             cO2inLungArray[o].alpha = 0;
-             cO2Array[o].alpha = 0;
-              cO2LeavingLungArray[o].alpha = 0;
-            }
-            for(var p = 2; p<6; p++){
-            cO2inLungArray[p].alpha = 1;
-            cO2Array[p].alpha = 1;
-             cO2LeavingLungArray[p].alpha = 1;
-            }
-
-            break;
-
-            case 4:
-              ox1.alpha = 0;
-              ox2.alpha = 1;
-              ox3.alpha = 1;
-              ox4.alpha = 1;
-              ox5.alpha = 1;
-
-              for(var q = 0; q<1; q++){
-             cO2inLungArray[q].alpha = 0;
-             cO2Array[q].alpha = 0;
-              cO2LeavingLungArray[q].alpha = 0;
-            }
-            for(var r = 1; r<6; r++){
-            cO2inLungArray[r].alpha = 1;
-            cO2Array[r].alpha = 1;
-             cO2LeavingLungArray[r].alpha = 1;
-            }
-
-                break;
-
-            case 5:
-               ox1.alpha = 1;
-               ox2.alpha = 1;
-               ox3.alpha = 1;
-               ox4.alpha = 1;
-               ox5.alpha = 1;
-
-            for(var s = 0; s<6; s++){
-            cO2inLungArray[s].alpha = 1;
-            cO2Array[s].alpha = 1;
-            cO2LeavingLungArray[s].alpha = 1;
-            }
-
-            break;
-
-
-            default:
-                ox1.alpha = 1;
-                ox2.alpha = 1;
-                ox3.alpha = 1;
-                ox4.alpha = 1;
-                ox5.alpha = 1;
-
-                for(var t = 0; t<6; t++){
-                cO2inLungArray[t].alpha = 1;
-                cO2Array[t].alpha = 1;
-                cO2LeavingLungArray[t].alpha = 1;
-                }
-
-               }
             }
 
 
@@ -246,6 +109,7 @@ public class Resp extends MovieClip {
              breathAni.addEventListener("BreathIn",  BreathIn);
              breathAni.addEventListener("BreathOut",  BreathOut);
 
+
              oxegenAni.addEventListener("stopped", oxAbsorbStopped);
              oxegenAni.addEventListener("playing", oxAbsorbPlaying);
         }
@@ -289,24 +153,229 @@ public class Resp extends MovieClip {
 
         function ariIn(e:Event){
 
+                  trace(theOxegenAmout);
 
-             switch(theOxegenAmout){
-
-              case 0:
-
-              break;
-
-              default:
-
-              }
 
              if (oxegenAniStopped == true){
+
+                   switch(theOxegenAmout){
+
+              case 0:
+               ox1.alpha = 0;
+               ox2.alpha = 0;
+               ox3.alpha = 0;
+               ox4.alpha = 0;
+               ox5.alpha = 0;
+
+
+               breathAni.ox6.alpha = 0;
+               breathAni.ox7.alpha = 0;
+               breathAni.ox8.alpha = 0;
+               breathAni.ox9.alpha = 0;
+               breathAni.ox10.alpha = 0;
+
+
+            for(var j = 0; j<3; j++){
+             cO2inLungArray[j].alpha = 0;
+             cO2Array[j].alpha = 0;
+             cO2LeavingLungArray[j].alpha = 0;
+            }
+            for(var i = 3; i<6; i++){
+            cO2inLungArray[i].alpha = 1;
+            cO2Array[i].alpha = 1;
+
+             cO2LeavingLungArray[j].alpha = 1;
+            }
+
+             break;
+
+             case 1:
+               ox1.alpha = 0;
+               ox2.alpha = 0;
+               ox3.alpha = 0;
+               ox4.alpha = 0;
+               ox5.alpha = 1;
+
+
+               breathAni.ox5.alpha = 0;
+               breathAni.ox6.alpha = 0;
+               breathAni.ox7.alpha = 0;
+               breathAni.ox8.alpha = 0;
+               breathAni.ox9.alpha = 0;
+               breathAni.ox10.alpha = 0;
+
+             for(var k = 0; k<3; k++){
+             cO2inLungArray[k].alpha = 0;
+             cO2Array[k].alpha = 0;
+              cO2LeavingLungArray[k].alpha = 0;
+            }
+            for(var l = 3; l<6; l++){
+            cO2inLungArray[l].alpha = 1;
+            cO2Array[l].alpha = 1;
+             cO2LeavingLungArray[l].alpha = 1;
+            }
+
+             break;
+
+             case 2:
+              ox1.alpha = 0;
+              ox2.alpha = 0;
+              ox3.alpha = 0;
+              ox4.alpha = 1;
+              ox5.alpha = 1;
+
+
+               breathAni.ox4.alpha = 0;
+               breathAni.ox5.alpha = 0;
+               breathAni.ox6.alpha = 0;
+               breathAni.ox7.alpha = 0;
+               breathAni.ox8.alpha = 0;
+               breathAni.ox9.alpha = 0;
+               breathAni.ox10.alpha = 0;
+
+           for(var m = 0; m<2; m++){
+             cO2inLungArray[m].alpha = 0;
+             cO2Array[m].alpha = 0;
+              cO2LeavingLungArray[m].alpha = 0;
+            }
+            for(var n = 2; n<6; n++){
+            cO2inLungArray[n].alpha = 1;
+            cO2Array[n].alpha = 1;
+             cO2LeavingLungArray[n].alpha = 1;
+            }
+
+
+            break;
+
+            case 3:
+              ox1.alpha = 0;
+              ox2.alpha = 0;
+              ox3.alpha = 1;
+              ox4.alpha = 1;
+              ox5.alpha = 1;
+
+
+               breathAni.ox3.alpha = 0;
+               breathAni.ox4.alpha = 0;
+               breathAni.ox5.alpha = 0;
+               breathAni.ox6.alpha = 0;
+               breathAni.ox7.alpha = 0;
+               breathAni.ox8.alpha = 0;
+               breathAni.ox9.alpha = 0;
+               breathAni.ox10.alpha = 0;
+
+            for(var o = 0; o<2; o++){
+             cO2inLungArray[o].alpha = 0;
+             cO2Array[o].alpha = 0;
+              cO2LeavingLungArray[o].alpha = 0;
+            }
+            for(var p = 2; p<6; p++){
+            cO2inLungArray[p].alpha = 1;
+            cO2Array[p].alpha = 1;
+             cO2LeavingLungArray[p].alpha = 1;
+            }
+
+            break;
+
+            case 4:
+              ox1.alpha = 0;
+              ox2.alpha = 1;
+              ox3.alpha = 1;
+              ox4.alpha = 1;
+              ox5.alpha = 1;
+
+
+               breathAni.ox2.alpha = 0;
+               breathAni.ox3.alpha = 0;
+               breathAni.ox4.alpha = 0;
+               breathAni.ox5.alpha = 0;
+               breathAni.ox6.alpha = 0;
+               breathAni.ox7.alpha = 0;
+               breathAni.ox8.alpha = 0;
+               breathAni.ox9.alpha = 0;
+               breathAni.ox10.alpha = 0;
+
+              for(var q = 0; q<1; q++){
+             cO2inLungArray[q].alpha = 0;
+             cO2Array[q].alpha = 0;
+              cO2LeavingLungArray[q].alpha = 0;
+            }
+            for(var r = 1; r<6; r++){
+            cO2inLungArray[r].alpha = 1;
+            cO2Array[r].alpha = 1;
+             cO2LeavingLungArray[r].alpha = 1;
+            }
+
+                break;
+
+            case 5:
+               ox1.alpha = 1;
+               ox2.alpha = 1;
+               ox3.alpha = 1;
+               ox4.alpha = 1;
+               ox5.alpha = 1;
+
+               breathAni.ox1.alpha = 0;
+               breathAni.ox2.alpha = 0;
+               breathAni.ox3.alpha = 0;
+               breathAni.ox4.alpha = 0;
+               breathAni.ox5.alpha = 0;
+               breathAni.ox6.alpha = 0;
+               breathAni.ox7.alpha = 0;
+               breathAni.ox8.alpha = 0;
+               breathAni.ox9.alpha = 0;
+               breathAni.ox10.alpha = 0;
+
+            for(var s = 0; s<6; s++){
+            cO2inLungArray[s].alpha = 1;
+            cO2Array[s].alpha = 1;
+            cO2LeavingLungArray[s].alpha = 1;
+            }
+
+            break;
+
+
+            default:
+                ox1.alpha = 1;
+                ox2.alpha = 1;
+                ox3.alpha = 1;
+                ox4.alpha = 1;
+                ox5.alpha = 1;
+
+
+               breathAni.ox1.alpha = 1;
+               breathAni.ox2.alpha = 1;
+               breathAni.ox3.alpha = 1;
+               breathAni.ox4.alpha = 1;
+               breathAni.ox5.alpha = 1;
+               breathAni.ox6.alpha = 1;
+               breathAni.ox7.alpha = 1;
+               breathAni.ox8.alpha = 1;
+               breathAni.ox9.alpha = 1;
+               breathAni.ox10.alpha = 1;
+
+                for(var t = 0; t<6; t++){
+                cO2inLungArray[t].alpha = 1;
+                cO2Array[t].alpha = 1;
+                cO2LeavingLungArray[t].alpha = 1;
+                }
+
+               }
+
+
+
+
+
+
                  oxegenAni.gotoAndPlay("one");
-                 for(var i = 0; i<5; i++){
-                 oxArray[i].gotoAndPlay("one");
+                 for(var h = 0; h<5; h++){
+                 oxArray[h].gotoAndPlay("one");
                  }
               }
         }
+
+
+
 
         function oxAbsorbStopped(e:Event){
              oxegenAniStopped = true;
