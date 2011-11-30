@@ -44,7 +44,7 @@ public class Resp extends MovieClip {
        private var  oxegenAniStopped:Boolean = true;
        private var  co2InLungs:Boolean = false;
        private var  co2EndOfLoop:Boolean = false;
-       private var  BreathInLungs:Boolean = false;
+       //private var  BreathInLungs:Boolean = false;
        private var theOxegenAmout:Number  = 5;
 
 	public function Resp(model:Model, controller:Controller){
@@ -60,6 +60,7 @@ public class Resp extends MovieClip {
 
     private function initModelEventListeners():void{
 			_model.addEventListener(Model.OXEGEN_AMOUNT, currOxegenAmoutHandler);
+       // _model.addEventListener(Model.BREATH_IN_LUNGS, breathInLungsHandler);
 		}
 
     private function currOxegenAmoutHandler(eve:Event):void{
@@ -84,6 +85,7 @@ public class Resp extends MovieClip {
             for(var i = 3; i<6; i++){
             cO2inLungArray[i].alpha = 1;
             cO2Array[i].alpha = 1;
+
              cO2LeavingLungArray[j].alpha = 1;
             }
 
@@ -249,11 +251,11 @@ public class Resp extends MovieClip {
         }
 
         function BreathIn(e:Event){
-               BreathInLungs = true;
+               _controller.breathInLungsTrue();
                }
 
          function BreathOut(e:Event){
-                BreathInLungs = false;
+                _controller.breathInLungsFalse();
                }
 
 
@@ -266,11 +268,10 @@ public class Resp extends MovieClip {
            }
 
            function cO2_2inLungEnd(e:Event){
-             if(BreathInLungs == true){
+             if(_model.breathInLungs == true){
                  for(var j = 0; j<6; j++){
                   cO2inLungArray[j].visible = false;
                   cO2inLungArray[j].gotoAndStop("first");
-
                   cO2LeavingLungArray[j].visible = true;
                   cO2LeavingLungArray[j].play();
                  }

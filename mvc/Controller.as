@@ -25,5 +25,15 @@ package mvc
             _model.startFood();
 
         }
+
+        public function breathInLungsTrue():void{
+              _model.breathInLungs  = true;
+        }
+
+        public function breathInLungsFalse():void{
+              _model.breathInLungs  = false;
+        }
+
+
     }
 }
