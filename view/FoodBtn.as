@@ -25,7 +25,7 @@ public class FoodBtn extends MovieClip {
 
         function init(){
         TweenPlugin.activate([ColorTransformPlugin]);
-
+         _model.addEventListener(Model.RESET_FOOD, appleEnd)
         }
 
        function creation (){
@@ -47,11 +47,18 @@ public class FoodBtn extends MovieClip {
         }
 
          function onApple(e:MouseEvent){
-           TweenLite.to(apple,1.5,{x:1170, colorTransform:{tint:0xFF0000, tintAmount:.5},ease:Quad.easeInOut,onComplete:appleEnd});
+           TweenLite.to(apple,1.5,{x:1170, colorTransform:{tint:0xFF0000, tintAmount:.5},ease:Quad.easeInOut,onComplete:feed});
          }
 
-    function appleEnd(){
-        _controller.feedApple();
+         function feed(){
+
+             _controller.feedApple();
+         }
+
+    function appleEnd(e:Event){
+
+       //  _controller.canAddFood = false;
+
        // dispatchEvent(new Event(SLIDER_END));
         apple.removeEventListener(MouseEvent.CLICK, onApple);
         TweenLite.to(apple,.5,{alpha:0,ease:Quad.easeInOut,delay:3,onComplete:onAppleOut});

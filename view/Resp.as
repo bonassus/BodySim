@@ -10,12 +10,12 @@ import mvc.Controller;
 public class Resp extends MovieClip {
        private var _model:Model;
        private var _controller:Controller;
-       private var ox1:Ox1 = new Ox1;
-       private var ox2:Ox2 = new Ox2;
-       private var ox3:Ox3 = new Ox3;
-       private var ox4:Ox4 = new Ox4;
-       private var ox5:Ox5 = new Ox5;
-       private var oxArray = [ox1,ox2,ox3,ox4,ox5];
+     //  private var ox1:Ox1 = new Ox1;
+      // private var ox2:Ox2 = new Ox2;
+     //  private var ox3:Ox3 = new Ox3;
+     //  private var ox4:Ox4 = new Ox4;
+    //   private var ox5:Ox5 = new Ox5;
+     //  private var oxArray = [ox1,ox2,ox3,ox4,ox5];
        private var cO2_1:CO2_1 = new CO2_1;
        private var cO2_2:CO2_2 = new CO2_2;
        private var cO2_3:CO2_3 = new CO2_3;
@@ -39,6 +39,7 @@ public class Resp extends MovieClip {
        private var cO2LeavingLungArray = [cO2LeavingLungs1,cO2LeavingLungs2,cO2LeavingLungs3,cO2LeavingLungs4,cO2LeavingLungs5,cO2LeavingLungs6 ];
        private var breathAni:BreathAni = new BreathAni;
        private var oxegenAni:OxegenAni = new OxegenAni;
+       private var co2Amount:Number  = 10;
        private var oxAniPosX:Number = 645;
        private var oxAniPosY:Number = 379;
        private var  oxegenAniStopped:Boolean = true;
@@ -56,6 +57,7 @@ public class Resp extends MovieClip {
     private function init():void{
 			initModelEventListeners();
             initAni();
+            addEventListener(Event.ENTER_FRAME, loop)
 		}
 
     private function initModelEventListeners():void{
@@ -79,11 +81,6 @@ public class Resp extends MovieClip {
             addChild(oxegenAni);
             addChild(breathAni);
 
-            for(var i = 0; i<5; i++){
-             oxArray[i].x = oxAniPosX;
-             oxArray[i].y = oxAniPosY;
-             addChild(oxArray[i]);
-            }
 
             for(var j = 0; j<6; j++){
             cO2Array[j].x  = oxAniPosX;
@@ -105,7 +102,7 @@ public class Resp extends MovieClip {
             addChild(cO2LeavingLungArray[j]);
             }
 
-             breathAni.addEventListener("airIn", ariIn);
+            breathAni.addEventListener("airIn", ariIn);
              breathAni.addEventListener("BreathIn",  BreathIn);
              breathAni.addEventListener("BreathOut",  BreathOut);
 
@@ -153,26 +150,32 @@ public class Resp extends MovieClip {
 
         function ariIn(e:Event){
 
-                  trace(theOxegenAmout);
-
-
              if (oxegenAniStopped == true){
+                   oxegenAni.gotoAndPlay("one");
+
 
                    switch(theOxegenAmout){
 
               case 0:
-               ox1.alpha = 0;
-               ox2.alpha = 0;
-               ox3.alpha = 0;
-               ox4.alpha = 0;
-               ox5.alpha = 0;
 
 
-               breathAni.ox6.alpha = 0;
-               breathAni.ox7.alpha = 0;
-               breathAni.ox8.alpha = 0;
-               breathAni.ox9.alpha = 0;
-               breathAni.ox10.alpha = 0;
+               oxegenAni.ox1.visible = false;
+               oxegenAni.ox2.visible = false;
+               oxegenAni.ox3.visible = false;
+               oxegenAni.ox4.visible = false;
+               oxegenAni.ox5.visible = false;
+               oxegenAni.ox6.visible = true;
+               oxegenAni.ox7.visible = true;
+               oxegenAni.ox8.visible = true;
+               oxegenAni.ox9.visible = true;
+               oxegenAni.ox10.visible = true;
+
+
+               breathAni.ox6.visible = false;
+               breathAni.ox7.visible = false;
+               breathAni.ox8.visible = false;
+               breathAni.ox9.visible = false;
+               breathAni.ox10.visible = false;
 
 
             for(var j = 0; j<3; j++){
@@ -190,19 +193,24 @@ public class Resp extends MovieClip {
              break;
 
              case 1:
-               ox1.alpha = 0;
-               ox2.alpha = 0;
-               ox3.alpha = 0;
-               ox4.alpha = 0;
-               ox5.alpha = 1;
 
+              oxegenAni.ox1.visible = false;
+               oxegenAni.ox2.visible = false;
+               oxegenAni.ox3.visible = false;
+               oxegenAni.ox4.visible = false;
+               oxegenAni.ox5.visible = true;
+               oxegenAni.ox6.visible = true;
+               oxegenAni.ox7.visible = true;
+               oxegenAni.ox8.visible = true;
+               oxegenAni.ox9.visible = true;
+               oxegenAni.ox10.visible = true;
 
-               breathAni.ox5.alpha = 0;
-               breathAni.ox6.alpha = 0;
-               breathAni.ox7.alpha = 0;
-               breathAni.ox8.alpha = 0;
-               breathAni.ox9.alpha = 0;
-               breathAni.ox10.alpha = 0;
+               breathAni.ox5.visible = false;
+               breathAni.ox6.visible = false;
+               breathAni.ox7.visible = false;
+               breathAni.ox8.visible = false;
+               breathAni.ox9.visible = false;
+               breathAni.ox10.visible = false;
 
              for(var k = 0; k<3; k++){
              cO2inLungArray[k].alpha = 0;
@@ -218,20 +226,25 @@ public class Resp extends MovieClip {
              break;
 
              case 2:
-              ox1.alpha = 0;
-              ox2.alpha = 0;
-              ox3.alpha = 0;
-              ox4.alpha = 1;
-              ox5.alpha = 1;
 
+               oxegenAni.ox1.visible = false;
+               oxegenAni.ox2.visible = false;
+               oxegenAni.ox3.visible = false;
+               oxegenAni.ox4.visible = true;
+               oxegenAni.ox5.visible = true;
+               oxegenAni.ox6.visible = true;
+               oxegenAni.ox7.visible = true;
+               oxegenAni.ox8.visible = true;
+               oxegenAni.ox9.visible = true;
+               oxegenAni.ox10.visible = true;
 
-               breathAni.ox4.alpha = 0;
-               breathAni.ox5.alpha = 0;
-               breathAni.ox6.alpha = 0;
-               breathAni.ox7.alpha = 0;
-               breathAni.ox8.alpha = 0;
-               breathAni.ox9.alpha = 0;
-               breathAni.ox10.alpha = 0;
+               breathAni.ox4.visible = false;
+               breathAni.ox5.visible = false;
+               breathAni.ox6.visible = false;
+               breathAni.ox7.visible = false;
+               breathAni.ox8.visible = false;
+               breathAni.ox9.visible = false;
+               breathAni.ox10.visible = false;
 
            for(var m = 0; m<2; m++){
              cO2inLungArray[m].alpha = 0;
@@ -248,21 +261,26 @@ public class Resp extends MovieClip {
             break;
 
             case 3:
-              ox1.alpha = 0;
-              ox2.alpha = 0;
-              ox3.alpha = 1;
-              ox4.alpha = 1;
-              ox5.alpha = 1;
 
+               oxegenAni.ox1.visible = false;
+               oxegenAni.ox2.visible = false;
+               oxegenAni.ox3.visible = true;
+               oxegenAni.ox4.visible = true;
+               oxegenAni.ox5.visible = true;
+               oxegenAni.ox6.visible = true;
+               oxegenAni.ox7.visible = true;
+               oxegenAni.ox8.visible = true;
+               oxegenAni.ox9.visible = true;
+               oxegenAni.ox10.visible = true;
 
-               breathAni.ox3.alpha = 0;
-               breathAni.ox4.alpha = 0;
-               breathAni.ox5.alpha = 0;
-               breathAni.ox6.alpha = 0;
-               breathAni.ox7.alpha = 0;
-               breathAni.ox8.alpha = 0;
-               breathAni.ox9.alpha = 0;
-               breathAni.ox10.alpha = 0;
+               breathAni.ox3.visible = false;
+               breathAni.ox4.visible = false;
+               breathAni.ox5.visible = false;
+               breathAni.ox6.visible = false;
+               breathAni.ox7.visible = false;
+               breathAni.ox8.visible = false;
+               breathAni.ox9.visible = false;
+               breathAni.ox10.visible = false;
 
             for(var o = 0; o<2; o++){
              cO2inLungArray[o].alpha = 0;
@@ -278,22 +296,27 @@ public class Resp extends MovieClip {
             break;
 
             case 4:
-              ox1.alpha = 0;
-              ox2.alpha = 1;
-              ox3.alpha = 1;
-              ox4.alpha = 1;
-              ox5.alpha = 1;
 
+               oxegenAni.ox1.visible = false;
+               oxegenAni.ox2.visible = true;
+               oxegenAni.ox3.visible = true;
+               oxegenAni.ox4.visible = true;
+               oxegenAni.ox5.visible = true;
+               oxegenAni.ox6.visible = true;
+               oxegenAni.ox7.visible = true;
+               oxegenAni.ox8.visible = true;
+               oxegenAni.ox9.visible = true;
+               oxegenAni.ox10.visible = true;
 
-               breathAni.ox2.alpha = 0;
-               breathAni.ox3.alpha = 0;
-               breathAni.ox4.alpha = 0;
-               breathAni.ox5.alpha = 0;
-               breathAni.ox6.alpha = 0;
-               breathAni.ox7.alpha = 0;
-               breathAni.ox8.alpha = 0;
-               breathAni.ox9.alpha = 0;
-               breathAni.ox10.alpha = 0;
+               breathAni.ox2.visible = false;
+               breathAni.ox3.visible = false;
+               breathAni.ox4.visible = false;
+               breathAni.ox5.visible = false;
+               breathAni.ox6.visible = false;
+               breathAni.ox7.visible = false;
+               breathAni.ox8.visible = false;
+               breathAni.ox9.visible = false;
+               breathAni.ox10.visible = false;
 
               for(var q = 0; q<1; q++){
              cO2inLungArray[q].alpha = 0;
@@ -309,78 +332,89 @@ public class Resp extends MovieClip {
                 break;
 
             case 5:
-               ox1.alpha = 1;
-               ox2.alpha = 1;
-               ox3.alpha = 1;
-               ox4.alpha = 1;
-               ox5.alpha = 1;
 
-               breathAni.ox1.alpha = 0;
-               breathAni.ox2.alpha = 0;
-               breathAni.ox3.alpha = 0;
-               breathAni.ox4.alpha = 0;
-               breathAni.ox5.alpha = 0;
-               breathAni.ox6.alpha = 0;
-               breathAni.ox7.alpha = 0;
-               breathAni.ox8.alpha = 0;
-               breathAni.ox9.alpha = 0;
-               breathAni.ox10.alpha = 0;
+               oxegenAni.ox1.visible = true;
+               oxegenAni.ox2.visible = true;
+               oxegenAni.ox3.visible = true;
+               oxegenAni.ox4.visible = true;
+               oxegenAni.ox5.visible = true;
+               oxegenAni.ox6.visible = true;
+               oxegenAni.ox7.visible = true;
+               oxegenAni.ox8.visible = true;
+               oxegenAni.ox9.visible = true;
+               oxegenAni.ox10.visible = true;
+//
+//
+               breathAni.ox1.visible = false;
+               breathAni.ox2.visible = false;
+               breathAni.ox3.visible = false;
+               breathAni.ox4.visible = false;
+               breathAni.ox5.visible = false;
+               breathAni.ox6.visible = false;
+               breathAni.ox7.visible = false;
+               breathAni.ox8.visible = false;
+               breathAni.ox9.visible = false;
+               breathAni.ox10.visible = false;
+
+
 
             for(var s = 0; s<6; s++){
-            cO2inLungArray[s].alpha = 1;
             cO2Array[s].alpha = 1;
-            cO2LeavingLungArray[s].alpha = 1;
+            cO2inLungArray[s].alpha = 1;
+           cO2LeavingLungArray[s].alpha = 1;
             }
 
             break;
 
 
             default:
-                ox1.alpha = 1;
-                ox2.alpha = 1;
-                ox3.alpha = 1;
-                ox4.alpha = 1;
-                ox5.alpha = 1;
+                  co2Amount = 10
+               oxegenAni.ox1.visible = true;
+               oxegenAni.ox2.visible = true;
+               oxegenAni.ox3.visible = true;
+               oxegenAni.ox4.visible = true;
+               oxegenAni.ox5.visible = true;
+               oxegenAni.ox6.visible = true;
+               oxegenAni.ox7.visible = true;
+               oxegenAni.ox8.visible = true;
+               oxegenAni.ox9.visible = true;
+               oxegenAni.ox10.visible = true;
 
 
-               breathAni.ox1.alpha = 1;
-               breathAni.ox2.alpha = 1;
-               breathAni.ox3.alpha = 1;
-               breathAni.ox4.alpha = 1;
-               breathAni.ox5.alpha = 1;
-               breathAni.ox6.alpha = 1;
-               breathAni.ox7.alpha = 1;
-               breathAni.ox8.alpha = 1;
-               breathAni.ox9.alpha = 1;
-               breathAni.ox10.alpha = 1;
+
+               breathAni.ox1.visible = true;
+               breathAni.ox2.visible = true;
+               breathAni.ox3.visible = true;
+               breathAni.ox4.visible = true;
+               breathAni.ox5.visible = true;
+               breathAni.ox6.visible = true;
+               breathAni.ox7.visible = true;
+               breathAni.ox8.visible = true;
+               breathAni.ox9.visible = true;
+               breathAni.ox10.visible = true;
 
                 for(var t = 0; t<6; t++){
-                cO2inLungArray[t].alpha = 1;
                 cO2Array[t].alpha = 1;
+               cO2inLungArray[t].alpha = 1;
                 cO2LeavingLungArray[t].alpha = 1;
                 }
 
                }
 
-
-
-
-
-
-                 oxegenAni.gotoAndPlay("one");
-                 for(var h = 0; h<5; h++){
-                 oxArray[h].gotoAndPlay("one");
-                 }
               }
         }
+
+    function loop(e:Event){
+    trace(co2Amount);
+}
 
 
 
 
         function oxAbsorbStopped(e:Event){
              oxegenAniStopped = true;
-
              for(var j = 0; j<6; j++){
+
             cO2Array[j].gotoAndPlay("one");
             cO2Array[j].visible = true;
             }

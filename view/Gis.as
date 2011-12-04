@@ -18,6 +18,8 @@ import mvc.Controller;
        private var starchChain4:StarchChain4 = new StarchChain4;
        private var starchChain5:StarchChain5 = new StarchChain5;
        private var protienInBlood:Boolean = false;
+       private var canAddFood:Boolean = true;
+
        private var protienChain1:ProtienChain1 = new ProtienChain1;
        private var protienChain2:ProtienChain2 = new ProtienChain2;
 
@@ -59,7 +61,7 @@ import mvc.Controller;
       // private var foodBtn:FoodBtn = new FoodBtn;
         public function Gis(model:Model, controller:Controller){
             _model = model;
-           // _controller = controller;
+            _controller = controller;
             init();
 		}
 
@@ -78,6 +80,17 @@ import mvc.Controller;
         cO2_1_5.y  = oxAniPosY;
         cO2_1_5.visible = false;
         addChild(cO2_1_5);
+
+        cO2_5inLung.x  = oxAniPosX;
+        cO2_5inLung.y  = oxAniPosY;
+        cO2_5inLung.visible = false;
+        addChild(cO2_5inLung);
+
+          cO2_5LeavingLung.x  = oxAniPosX;
+        cO2_5LeavingLung.y  = oxAniPosY;
+        cO2_5LeavingLung.visible = false;
+        addChild(cO2_5LeavingLung);
+
 
              for(var i = 0; i<starchChainArray.length; i++){
                  addChild(starchChainArray[i]);
@@ -98,30 +111,18 @@ import mvc.Controller;
             cO2LeavingLungArray[j].y = oxAniPosY;
             cO2LeavingLungArray[j].visible = false;
 
-            addChild(cO2LeavingLungArray[j]);
-            }
+            addChild(cO2LeavingLungArray[j]);}
+        _model.addEventListener(Model.FOOD, checkToAddFood)
+		    }
 
+        function checkToAddFood(e:Event){
+        addFood();
+        }
 
+           function addFood(){
 
-//            for(var k = 0; k<3; k++){
-//             cO2Array[k].addEventListener("end", co2end);
-//             cO2inLungArray[k].addEventListener("end", cO2_2inLungEnd);
-//             cO2LeavingLungArray[k].addEventListener("end", cO2_2LeavingEnd);
-//            }
-//
-//         for(var l = 3; l<6; l++){
-//             cO2Array[l].addEventListener("end", co2endP);
-//             cO2inLungArray[l].addEventListener("end", cO2_2inLungEndP);
-//             cO2LeavingLungArray[l].addEventListener("end", cO2_2LeavingEndP);
-//            }
-
-        _model.addEventListener(Model.FOOD, addFood)
-		        }
-
-           function addFood(e:Event){
               protienChain1.alpha = 1;
               protienChain1.gotoAndPlay("one");
-//              protienChain1.bg.visible = false;
               starchChain1.alpha = 1;
               starchChain1.gotoAndPlay("one");
               starchChain1.addEventListener("end", starchChainEnd1);
@@ -133,19 +134,16 @@ import mvc.Controller;
            }
 
         function starchChainEnd1(e:Event){
-
-
           starchChain2.alpha = 1;
           starchChain2.gotoAndPlay("one");
-
         }
 
 
          function protienChainEnd1(e:Event){
          protienChain1.alpha = 0;
-        protienChain1.gotoAndStop("first");
-        protienChain2.alpha = 1;
-        protienChain2.gotoAndPlay("one");
+         protienChain1.gotoAndStop("first");
+         protienChain2.alpha = 1;
+         protienChain2.gotoAndPlay("one");
          }
 
 
@@ -169,6 +167,7 @@ import mvc.Controller;
         }
 
         function starchChainEnd3(e:Event){
+
           starchChain3.alpha = 0;
           starchChain3.gotoAndStop("first");
 
@@ -176,78 +175,44 @@ import mvc.Controller;
           starchChain4.gotoAndPlay("one");
           starchChain5.alpha = 1;
           starchChain5.gotoAndPlay("one");
+
+            _controller.canAddFoodToTrue();
         }
 
         function starchChainEnd4(e:Event){
           starchChain4.alpha = 0;
           starchChain4.gotoAndStop("first");
+
+
           for(var j = 0; j<3; j++){
             cO2Array[j].play();
             cO2Array[j].visible = true;
-            cO2Array[j].addEventListener("end", co2end);
-            cO2inLungArray[j].addEventListener("end", cO2_2inLungEnd);
-            cO2LeavingLungArray[j].addEventListener("end", cO2_2LeavingEnd);
+            cO2Array[0].addEventListener("end", co2end);
+
             }
 
 
         }
 
-        function starchChainEnd5(e:Event){
-          starchChain5.alpha = 0;
-          starchChain5.gotoAndStop("first");
 
-        }
 
 
        function protienChainEnd2(e:Event){
             for(var j = 3; j<6; j++){
             cO2Array[j].play();
             cO2Array[j].visible = true;
-            cO2Array[j].addEventListener("end", co2endP);
-            cO2inLungArray[j].addEventListener("end", cO2_2inLungEndP);
-            cO2LeavingLungArray[j].addEventListener("end", cO2_2LeavingEndP);
+            cO2Array[3].addEventListener("end", co2endP);
+
             }
          }
 
-
-
-        function co2end(e:Event){
-            for(var j = 0; j<3; j++){
-            cO2Array[j].visible = false;
-            cO2inLungArray[j].gotoAndPlay("one");
-            cO2inLungArray[j].visible = true;
-            cO2Array[j].removeEventListener("end", co2end);
-            }
-           }
-
-           function cO2_2inLungEnd(e:Event){
-             if(_model.breathInLungs == true){
-                 for(var j = 0; j<3; j++){
-                  cO2inLungArray[j].visible = false;
-                  cO2inLungArray[j].gotoAndStop("first");
-                   cO2LeavingLungArray[j].gotoAndPlay("one");
-                  cO2LeavingLungArray[j].visible = true;
-                  cO2inLungArray[j].removeEventListener("end", cO2_2inLungEnd);
-                }
-            }
-        }
-
-
-         function cO2_2LeavingEnd(e:Event){
-               for(var j = 0; j<3; j++){
-                  cO2inLungArray[j].visible = false;
-                  cO2inLungArray[j].gotoAndStop("first");
-                  cO2LeavingLungArray[j].visible = false;
-                  cO2LeavingLungArray[j].gotoAndStop("first");
-                   cO2LeavingLungArray[j].removeEventListener("end", cO2_2LeavingEnd);
-                 }
-         }
-        //----------------------------------------------------------------------
-        function co2endP(e:Event){
+          function co2endP(e:Event){
                for(var j = 3; j<6; j++){
                cO2Array[j].visible = false;
                cO2inLungArray[j].gotoAndPlay("one");
                cO2inLungArray[j].visible = true;
+               cO2inLungArray[3].addEventListener("end", cO2_2inLungEndP);
+
                    cO2Array[j].removeEventListener("end", co2endP);
                }
               }
@@ -259,6 +224,7 @@ import mvc.Controller;
                      cO2inLungArray[j].gotoAndStop("first");
                       cO2LeavingLungArray[j].gotoAndPlay("one");
                      cO2LeavingLungArray[j].visible = true;
+                      cO2LeavingLungArray[3].addEventListener("end", cO2_2LeavingEndP);
                         cO2inLungArray[j].removeEventListener("end", cO2_2inLungEndP);
                    }
                }
@@ -272,36 +238,84 @@ import mvc.Controller;
                      cO2LeavingLungArray[j].visible = false;
                      cO2LeavingLungArray[j].gotoAndStop("first");
                      cO2LeavingLungArray[j].removeEventListener("end", cO2_2LeavingEndP);
-                    }
+               }
             }
 
-         function Starch5End(e:Event){
+
+        function co2end(e:Event){
+            canAddFood = false;
+            for(var j = 0; j<3; j++){
+            cO2Array[j].visible = false;
+            cO2inLungArray[j].gotoAndPlay("one");
+            cO2inLungArray[j].visible = true;
+           cO2inLungArray[0].addEventListener("end", cO2_2inLungEnd);
+            cO2Array[j].removeEventListener("end", co2end);
+             }
+           }
+
+           function cO2_2inLungEnd(e:Event){
+
+             if(_model.breathInLungs == true){
+                 for(var j = 0; j<3; j++){
+                  cO2inLungArray[j].visible = false;
+                  cO2inLungArray[j].gotoAndStop("first");
+                  cO2LeavingLungArray[j].gotoAndPlay("one");
+                  cO2LeavingLungArray[j].visible = true;
+                  cO2LeavingLungArray[0].addEventListener("end", cO2_2LeavingEnd);
+                  cO2inLungArray[j].removeEventListener("end", cO2_2inLungEnd);
+                }
+            }
+        }
+
+         function cO2_2LeavingEnd(e:Event){
+               for(var j = 0; j<3; j++){
+                 cO2inLungArray[j].visible = false;
+                 cO2inLungArray[j].gotoAndStop("first");
+                 cO2LeavingLungArray[j].visible = false;
+                 cO2LeavingLungArray[j].gotoAndStop("first");
+                 cO2LeavingLungArray[j].removeEventListener("end", cO2_2LeavingEnd);
+                 }
+         }
+        //----------------------------------------------------------------------
+//       function starchChainEnd5(e:Event){
+////          starchChain5.alpha = 0;
+////          starchChain5.gotoAndStop("first");
+////           trace("5end");
+//        }
+
+         function starchChainEnd5(e:Event){
+              starchChain5.alpha = 0;
+          starchChain5.gotoAndStop("first");
+           trace("5end");
+
             cO2_1_5.visible = true;
             cO2_1_5.gotoAndPlay("one");
-         //    cO2_1_5.addEventListener("end2", co2_5end);
-         //    cO2_5inLung.addEventListener("end2", cO2_2_5inLungEnd);
-          //   cO2_5LeavingLung.addEventListener("end2", cO2_2_5LeavingEnd);
+             cO2_1_5.addEventListener("end2", co2_5end);
+
          }
 
 
 
         function co2_5end(e:Event){
-
+                 trace("intering lungs");
                cO2_1_5.visible = false;
                cO2_5inLung.gotoAndPlay("one");
                cO2_5inLung.visible = true;
-             //  cO2_1_5.removeEventListener("end2", co2_5end);
+                cO2_5inLung.addEventListener("end2", cO2_2_5inLungEnd);
+
+               cO2_1_5.removeEventListener("end2", co2_5end);
 
               }
 
               function cO2_2_5inLungEnd(e:Event){
                 if(_model.breathInLungs == true){
-
+                      trace("leaving lungs");
                      cO2_5inLung.visible = false;
                      cO2_5inLung.gotoAndStop("first");
                      cO2_5LeavingLung.gotoAndPlay("one");
-                     cO2_5LeavingLung.visible = true;
-                //    cO2_5inLung.removeEventListener("end2", cO2_2_5inLungEnd);
+                    cO2_5LeavingLung.visible = true;
+                    cO2_5LeavingLung.addEventListener("end2", cO2_2_5LeavingEnd);
+                   cO2_5inLung.removeEventListener("end2", cO2_2_5inLungEnd);
 
                }
            }
@@ -313,7 +327,7 @@ import mvc.Controller;
                      cO2_5inLung.gotoAndStop("first");
                      cO2_5LeavingLung.visible = false;
                      cO2_5LeavingLung.gotoAndStop("first");
-                 //    cO2_5LeavingLung.removeEventListener("end2", cO2_2_5LeavingEnd);
+                     cO2_5LeavingLung.removeEventListener("end2", cO2_2_5LeavingEnd);
 
             }
 

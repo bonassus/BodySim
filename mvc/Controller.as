@@ -11,19 +11,13 @@ package mvc
 		private var _sliderAmout:Number;
 
 
-		public function Controller(model:Model)
-		{
+		public function Controller(model:Model){
 			_model = model;
 		}
 
         public function set sliderAmout(value:Number):void {
             _sliderAmout = Math.floor(value / 20);
             _model.setOxegnAmout(_sliderAmout);
-        }
-
-        public function feedApple():void{
-            _model.startFood();
-
         }
 
         public function breathInLungsTrue():void{
@@ -34,6 +28,13 @@ package mvc
               _model.breathInLungs  = false;
         }
 
+        public function feedApple():void{
+             _model.startFood();
+        }
 
+       public function canAddFoodToTrue():void{
+            _model.setcanAddFoodToTrue();
+
+       }
     }
 }
