@@ -34,7 +34,17 @@ package mvc
 
        public function canAddFoodToTrue():void{
             _model.setcanAddFoodToTrue();
-
        }
+
+       public function startCo2():void{
+            _model.startCo2();
+       }
+
+       public function oxegenInBlood():void{
+
+             _model.oxegenInBlood();
+       }
+
+
     }
 }

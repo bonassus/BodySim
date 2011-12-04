@@ -11,6 +11,11 @@ package mvc
         public static const BREATH_IN_LUNGS:String = 'BreathInLungs';
         public static const FOOD:String = 'Food';
         public static const RESET_FOOD = 'Reset_Food';
+        public static const START_CO2 = 'Start_Co2';
+        public static const OXEGEN_IN_BLOOD = 'oxegenInBlood';
+
+        private var _ResPosX:Number = 645;
+        private var _ResPosY:Number = 379;
 		private var _oxegenAmout:Number;
         private var  _breathInLungs:Boolean = false;
         private var canAddFood:Boolean = true;
@@ -36,7 +41,12 @@ package mvc
             }
 
         }
-
+       public function startCo2():void{
+          dispatchEvent(new Event(START_CO2));
+       }
+       public function oxegenInBlood():void{
+          dispatchEvent(new Event(OXEGEN_IN_BLOOD));
+       }
 
         public function get oxegenAmout():Number {
             return _oxegenAmout;
@@ -50,6 +60,14 @@ package mvc
             _breathInLungs = value;
             dispatchEvent(new Event(BREATH_IN_LUNGS));
 
+        }
+
+        public function get ResPosX():Number {
+            return _ResPosX;
+        }
+
+        public function get ResPosY():Number {
+            return _ResPosY;
         }
     }
 }
