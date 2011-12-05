@@ -14,12 +14,12 @@ import mvc.Controller;
         private var lungInvis:Invis = new Invis();
         private var lungBack:LungSliderBack = new LungSliderBack;
         private var lungGraph:LungBtnGraph = new LungBtnGraph;
-        private var oxText:TextDisplay = new TextDisplay("0x000000",true,20);
-        private var oxText2:TextDisplay = new TextDisplay("0xffffff",true,20);
-        private var oxText3:TextDisplay = new TextDisplay("0xffffff",true,52);
-        private var co2Text:TextDisplay = new TextDisplay("0x909090",true,21);
-        private var oxLabel:TextDisplay = new TextDisplay("0x333333",true,16);
-        private var co2Label:TextDisplay = new TextDisplay("0x333333",true,16);
+        private var oxText:TextDisplay = new TextDisplay("0x000000",true,20,100);
+        private var oxText2:TextDisplay = new TextDisplay("0xffffff",true,20,100);
+        private var oxText3:TextDisplay = new TextDisplay("0xffffff",true,52,100);
+        private var co2Text:TextDisplay = new TextDisplay("0x909090",true,21,100);
+        private var oxLabel:TextDisplay = new TextDisplay("0x333333",true,16,100);
+        private var co2Label:TextDisplay = new TextDisplay("0x333333",true,16,100);
         private var theOxegenAmout:Number  = 5;
 
 		public function LungBtn(model:Model, controller:Controller) {

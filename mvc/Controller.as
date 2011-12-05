@@ -8,7 +8,7 @@ package mvc
 	public class Controller
 	{
 		private var _model:Model;
-		private var _sliderAmout:Number;
+		private var _sliderAmout:Number = 5;
 
 
 		public function Controller(model:Model){
@@ -42,7 +42,62 @@ package mvc
 
        public function oxegenInBlood():void{
 
-             _model.oxegenInBlood();
+           _model.bloodOxegenLevel = 10 *(_sliderAmout+ 5);
+           _model.oxegenInBlood();
+       }
+
+       public function oxegenOutBlood():void{
+           _model.bloodOxegenLevel = 0;
+           _model.oxegenOutBlood();
+       }
+
+       public function setTotalCo2(amount:Number):void{
+           var quantity:Number;
+
+             quantity += amount;
+           trace(quantity + "quantity");
+            _model.totalCo2  = quantity;
+       }
+
+       public function co2InBlood(amount:Number){
+          _model.addToTotalCo2(amount);
+          _model.upDateCo2R();
+       }
+
+        public function co2OutBlood(amount:Number){
+         _model.subToTotalCo2(amount);
+         _model.upDateCo2R();
+
+       }
+
+        public function foodCell(){
+         _model.foodCell();
+        }
+
+        public function addGlucose(amount:Number){
+         _model.addGlucose(amount);
+         _model.upDateGlucose();
+       }
+
+       public function subGlucose(amount:Number){
+         _model.subGlucose(amount);
+         _model.upDateGlucose();
+       }
+
+
+
+       public function addStarchAmount(amount:Number){
+         _model.addStarch(amount);
+         _model.upDateStarch();
+       }
+
+       public function subStarchAmount(amount:Number){
+         _model.subStarch(amount);
+         _model.upDateStarch();
+       }
+
+       public function oxInCell(){
+         _model.oxInCell();
        }
 
 

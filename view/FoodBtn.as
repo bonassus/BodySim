@@ -33,12 +33,12 @@ public class FoodBtn extends MovieClip {
 
           foodSliderBack.x =941;
           foodSliderBack.y  = 36;
-          addChild(foodSliderBack);
+          //addChild(foodSliderBack);
 
 
            track.x = 1000;
            track.y = 80;
-           addChild(track);
+           //addChild(track);
 
            apple.x = 1000;
            apple.y = 80;
@@ -47,7 +47,7 @@ public class FoodBtn extends MovieClip {
         }
 
          function onApple(e:MouseEvent){
-           TweenLite.to(apple,1.5,{x:1170, colorTransform:{tint:0xFF0000, tintAmount:.5},ease:Quad.easeInOut,onComplete:feed});
+           TweenLite.to(apple,1.5,{x:1140, colorTransform:{tint:0xFF0000, tintAmount:.5},ease:Quad.easeInOut,onComplete:feed});
          }
 
          function feed(){

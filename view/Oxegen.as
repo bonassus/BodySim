@@ -47,10 +47,8 @@ public class Oxegen extends MovieClip {
 
 
          private function initAni():void{
-
             oxegenAni.x = oxAniPosX;
             oxegenAni.y =  oxAniPosY;
-
             breathAni.x = oxAniPosX;
             breathAni.y = oxAniPosY;
 
@@ -65,6 +63,8 @@ public class Oxegen extends MovieClip {
 
              oxegenAni.addEventListener("stopped", oxegenAniEnd);
              oxegenAni.addEventListener("playing", oxAbsorbPlaying);
+              oxegenAni.addEventListener("cell", oxInCell);
+
         }
 
         function BreathIn(e:Event){
@@ -83,7 +83,8 @@ public class Oxegen extends MovieClip {
 
                  setOxegenAmount();
                  _controller.oxegenInBlood();
-                   oxegenAni.gotoAndPlay("one");
+
+                  oxegenAni.gotoAndPlay("one");
 
 
                    switch(_oxegenAmount){
@@ -283,9 +284,15 @@ public class Oxegen extends MovieClip {
 
 
         function oxegenAniEnd(e:Event){
+
              oxegenAniStopped = true;
-               _controller.startCo2();
+            _controller.oxegenOutBlood();
+            _controller.startCo2();
         }
+
+    function oxInCell(e:Event){
+        _controller.oxInCell();
+    }
 
 
          function oxAbsorbPlaying(e:Event){

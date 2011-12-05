@@ -12,6 +12,8 @@ import mvc.Controller;
 	public class Gis extends MovieClip{
       private var _model:Model;
        private var _controller:Controller;
+      private var foodBtn:FoodBtn;
+
        private var starchChain1:StarchChain = new StarchChain;
        private var starchChain2:StarchChain2 = new StarchChain2;
        private var starchChain3:StarchChain3 = new StarchChain3;
@@ -23,8 +25,8 @@ import mvc.Controller;
        private var protienChain1:ProtienChain1 = new ProtienChain1;
        private var protienChain2:ProtienChain2 = new ProtienChain2;
 
-       private var oxAniPosX:Number = 645;
-       private var oxAniPosY:Number = 379;
+       private var oxAniPosX:Number;
+       private var oxAniPosY:Number;
 
        private var cO2_1:CO2_1 = new CO2_1;
        private var cO2_1_5:cO2_last = new cO2_last;
@@ -62,17 +64,25 @@ import mvc.Controller;
         public function Gis(model:Model, controller:Controller){
             _model = model;
             _controller = controller;
+            foodBtn = new FoodBtn(model,controller);
+            oxAniPosX = _model.ResPosX ;
+            oxAniPosY = _model.ResPosY ;
             init();
 		}
 
     private function init():void{
 
         protienChain1.alpha = 0;
+        protienChain1.x = oxAniPosX - 660;
+
         addChild(protienChain1);
         protienChain1.addEventListener("end", protienChainEnd1);
         protienChain2.addEventListener("intoBlood", protienIntoBlood);
         protienChain2.addEventListener("end", protienChainEnd2);
+
+
         protienChain2.alpha = 0;
+        protienChain2.x = oxAniPosX - 660;
         addChild(protienChain2);
 
           cO2_1_5.addEventListener("end", protienChainEnd2);
@@ -91,14 +101,18 @@ import mvc.Controller;
         cO2_5LeavingLung.visible = false;
         addChild(cO2_5LeavingLung);
 
+        foodBtn.x = oxAniPosX - 1780;
+        foodBtn.y = oxAniPosY -30;
+        addChild(foodBtn);
 
              for(var i = 0; i<starchChainArray.length; i++){
-                 addChild(starchChainArray[i]);
-                 starchChainArray[i].alpha = 0;
+               starchChainArray[i].x = oxAniPosX - 660;
+               addChild(starchChainArray[i]);
+               starchChainArray[i].alpha = 0;
              }
 
             for(var j = 0; j<6; j++){
-            cO2Array[j].x  = oxAniPosX;
+            cO2Array[j].x  = oxAniPosX ;
             cO2Array[j].y  = oxAniPosY;
 
             addChild(cO2Array[j]);
@@ -115,6 +129,8 @@ import mvc.Controller;
         _model.addEventListener(Model.FOOD, checkToAddFood)
 		    }
 
+
+
         function checkToAddFood(e:Event){
         addFood();
         }
@@ -129,8 +145,17 @@ import mvc.Controller;
               starchChain2.addEventListener("end", starchChainEnd2);
               starchChain3.addEventListener("end", starchChainEnd3);
               starchChain4.addEventListener("end", starchChainEnd4);
-              starchChain5.addEventListener("end", starchChainEnd5);
 
+               starchChain4.addEventListener("g1", starchChainEnd4g1);
+               starchChain4.addEventListener("g2", starchChainEnd4g2);
+               starchChain4.addEventListener("g3", starchChainEnd4g3);
+               starchChain4.addEventListener("g4", starchChainEnd4g4);
+               starchChain4.addEventListener("cell", foodCell);
+                starchChain5.addEventListener("cell", foodCell);
+                protienChain2.addEventListener("cell", foodCell);
+
+              starchChain5.addEventListener("end", starchChainEnd5);
+              starchChain5.addEventListener("g5", starchChainEnd5g5);
            }
 
         function starchChainEnd1(e:Event){
@@ -180,24 +205,28 @@ import mvc.Controller;
         }
 
         function starchChainEnd4(e:Event){
+            _controller.co2InBlood(3);
+             _controller.subGlucose(4);
+
           starchChain4.alpha = 0;
           starchChain4.gotoAndStop("first");
-
 
           for(var j = 0; j<3; j++){
             cO2Array[j].play();
             cO2Array[j].visible = true;
             cO2Array[0].addEventListener("end", co2end);
-
             }
+        }
 
-
+        function foodCell(e:Event){
+        _controller.foodCell()
         }
 
 
 
-
        function protienChainEnd2(e:Event){
+           _controller.co2InBlood(3);
+
             for(var j = 3; j<6; j++){
             cO2Array[j].play();
             cO2Array[j].visible = true;
@@ -207,6 +236,8 @@ import mvc.Controller;
          }
 
           function co2endP(e:Event){
+              _controller.co2OutBlood(3);
+
                for(var j = 3; j<6; j++){
                cO2Array[j].visible = false;
                cO2inLungArray[j].gotoAndPlay("one");
@@ -243,6 +274,8 @@ import mvc.Controller;
 
 
         function co2end(e:Event){
+            _controller.co2OutBlood(3);
+
             canAddFood = false;
             for(var j = 0; j<3; j++){
             cO2Array[j].visible = false;
@@ -284,6 +317,8 @@ import mvc.Controller;
 //        }
 
          function starchChainEnd5(e:Event){
+             _controller.co2InBlood(1);
+             _controller.subGlucose(1);
               starchChain5.alpha = 0;
           starchChain5.gotoAndStop("first");
            trace("5end");
@@ -291,12 +326,12 @@ import mvc.Controller;
             cO2_1_5.visible = true;
             cO2_1_5.gotoAndPlay("one");
              cO2_1_5.addEventListener("end2", co2_5end);
-
          }
 
 
 
         function co2_5end(e:Event){
+             _controller.co2OutBlood(1);
                  trace("intering lungs");
                cO2_1_5.visible = false;
                cO2_5inLung.gotoAndPlay("one");
@@ -331,7 +366,26 @@ import mvc.Controller;
 
             }
 
-
+    function starchChainEnd4g1(e:Event){
+          _controller.addGlucose(1);
+         _controller.subStarchAmount(1);
+        }
+    function starchChainEnd4g2(e:Event){
+          _controller.addGlucose(1);
+         _controller.subStarchAmount(1);
+        }
+    function starchChainEnd4g3(e:Event){
+          _controller.addGlucose(1);
+         _controller.subStarchAmount(1);
+        }
+    function starchChainEnd4g4(e:Event){
+           _controller.addGlucose(1);
+         _controller.subStarchAmount(1);
+        }
+     function starchChainEnd5g5(e:Event){
+           _controller.addGlucose(1);
+          _controller.subStarchAmount(1);
+        }
 
 	}
 	

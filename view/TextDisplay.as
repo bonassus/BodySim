@@ -10,9 +10,10 @@ package view
     import flash.text.TextFormat;
     import flash.text.AntiAliasType
     import flash.text.TextFieldAutoSize;
+import flash.text.TextFormatAlign;
 
 
-	public class TextDisplay extends MovieClip{
+public class TextDisplay extends MovieClip{
 
    // public static const SLIDER_CHANGE:String = 'Slider Change';
      //   e.updateAfterEvent();
@@ -24,11 +25,13 @@ package view
     private var loader:SWFLoader;
     private var fontClass:Class;
     private var _theColor:String;
+
     private var _ifBold:Boolean;
     private var _textSize:uint;
 
-		public function TextDisplay(theColor,bold,textSize){
-            _ifBold = bold
+		public function TextDisplay(theColor,bold,textSize,startText){
+            _theText = startText;
+            _ifBold = bold;
             _theColor = theColor;
             _textSize = textSize;
 
@@ -48,13 +51,14 @@ package view
 			textFormat.size = _textSize;
 			textFormat.bold = _ifBold;
             textFormat.color =_theColor;
+             textFormat.align = TextFormatAlign.RIGHT;
 
 			theTextField.text = _theText;
 			theTextField.setTextFormat(textFormat);
 			theTextField.selectable = false;
 			theTextField.mouseEnabled = false;
-             theTextField.antiAliasType = AntiAliasType.ADVANCED;
-            theTextField.autoSize = TextFieldAutoSize.LEFT;
+            theTextField.antiAliasType = AntiAliasType.ADVANCED;
+            theTextField.autoSize = TextFieldAutoSize.RIGHT;
 			addChild(theTextField);
       //  theTextField.text = _theText;
     }

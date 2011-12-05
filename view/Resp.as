@@ -30,7 +30,7 @@ public class Resp extends MovieClip {
      private function creation(){
           addChild(oxegen);
           addChild(co2);
-         addChild(lungBtn);
+        // addChild(lungBtn);
        }
 
 	}
