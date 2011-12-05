@@ -16,21 +16,22 @@ import flash.text.TextFormat;
 	{
 		private var _model:Model;
 		private var _controller:Controller;
-        private var oxegen:Oxegen;
+        private var respiratory:Resp;
+        private var gis:Gis;
         private var lungBtn:LungBtn
         private var foodBtn:FoodBtn;
-        private var co2:Co2;
+
         private var bodySimBG:BodySimBG = new BodySimBG;
-        private var gis:Gis;
+
 
 		public function View(model:Model, controller:Controller){
 			_model = model;
 			_controller = controller;
-            oxegen = new Oxegen(model,controller);
+            respiratory  = new Resp(model,controller);
             lungBtn = new LungBtn(model,controller);
             foodBtn = new FoodBtn(model,controller);
             gis = new Gis(model,controller);
-           co2 = new Co2(model,controller);
+
 			init();
 		}
 		
@@ -45,12 +46,10 @@ import flash.text.TextFormat;
 
         private function creation (){
           addChild(bodySimBG);
-          addChild(oxegen);
+            addChild(respiratory);
           addChild(lungBtn);
           addChild(foodBtn);
           addChild(gis);
-          addChild(co2);
-
        }
 
 	}
