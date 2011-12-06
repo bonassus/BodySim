@@ -47,31 +47,32 @@ public class FoodBtn extends MovieClip {
         }
 
          function onApple(e:MouseEvent){
-           TweenLite.to(apple,1.5,{x:1140, colorTransform:{tint:0xFF0000, tintAmount:.5},ease:Quad.easeInOut,onComplete:feed});
+           TweenLite.to(apple,1.5,{x:1140, colorTransform:{tint:0xFF0000, tintAmount:.5},
+               ease:Quad.easeInOut,onComplete:feed});
          }
 
          function feed(){
+                 _controller.feedApple();
+              _controller.resetFoodBtn();
+          }
 
-             _controller.feedApple();
-         }
+        function appleEnd(e:Event){
 
-    function appleEnd(e:Event){
+            apple.removeEventListener(MouseEvent.CLICK, onApple);
+            TweenLite.to(apple,.5,{alpha:0,ease:Quad.easeInOut,onComplete:onAppleOut});
+        }
 
-       //  _controller.canAddFood = false;
+        function onAppleOut(){
 
-       // dispatchEvent(new Event(SLIDER_END));
-        apple.removeEventListener(MouseEvent.CLICK, onApple);
-        TweenLite.to(apple,.5,{alpha:0,ease:Quad.easeInOut,delay:3,onComplete:onAppleOut});
-    }
+            TweenLite.to(apple,0,{x:1000, colorTransform:{tint:0xFF0000, tintAmount:0},
+                ease:Quad.easeInOut,onComplete:onAppleBack});
+        }
 
-    function onAppleOut(){
-        TweenLite.to(apple,0,{x:1000, colorTransform:{tint:0xFF0000, tintAmount:0},ease:Quad.easeInOut,onComplete:onAppleBack});
-    }
-
-    function onAppleBack(){
-        apple.addEventListener(MouseEvent.CLICK, onApple);
-       TweenLite.to(apple,1,{alpha:1,ease:Quad.easeInOut});
-    }
+        function onAppleBack(){
+            trace("apple back");
+            apple.addEventListener(MouseEvent.CLICK, onApple);
+           TweenLite.to(apple,1,{alpha:1,ease:Quad.easeInOut});
+        }
 
 }
 	

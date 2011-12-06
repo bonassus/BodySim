@@ -16,16 +16,16 @@ package mvc
         public static const OXEGEN_OUT_BLOOD = 'oxegenOutBlood';
         public static const CO2_UPDATE = 'Co2UpDate';
         public static const GLUCOSE_UPDATE = 'Glucose_Update';
-         public static const STARCH_UPDATE = 'Starch_Update';
+        public static const STARCH_UPDATE = 'Starch_Update';
         public static const OX_IN_CELL = 'oxInCell';
-         public static const FOOD_CELL = 'food_cell';
+        public static const FOOD_CELL = 'food_cell';
 
 
-        private var _ResPosX:Number = 825;
-        private var _ResPosY:Number = 379;
+        private var _posX:Number = 825;
+        private var _posY:Number = 379;
 		private var _oxegenAmout:Number = 5;
         private var  _breathInLungs:Boolean = false;
-        private var canAddFood:Boolean = true;
+       // private var canAddFood:Boolean = true;
 
         private var _totalCo2:Number = 0;
         private var _glucoseTotal:Number = 0;
@@ -51,19 +51,15 @@ package mvc
 			dispatchEvent(new Event(OXEGEN_AMOUNT));
 		}
 
-        public function setcanAddFoodToTrue(){
-
-         canAddFood = true;
+        public function resetFoodBtn(){
+        // canAddFood = true;
          dispatchEvent(new Event(RESET_FOOD));
         }
 
         public function startFood():void{
-            if(canAddFood == true){
               dispatchEvent(new Event(FOOD));
-             canAddFood = false;
-            }
-
         }
+
        public function startCo2():void{
           dispatchEvent(new Event(START_CO2));
        }
@@ -90,12 +86,12 @@ package mvc
 
         }
 
-        public function get ResPosX():Number {
-            return _ResPosX;
+        public function get PosX():Number {
+            return _posX;
         }
 
-        public function get ResPosY():Number {
-            return _ResPosY;
+        public function get PosY():Number {
+            return _posY;
         }
 
         public function addToTotalCo2(value:Number):void {

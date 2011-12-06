@@ -32,8 +32,8 @@ package mvc
              _model.startFood();
         }
 
-       public function canAddFoodToTrue():void{
-            _model.setcanAddFoodToTrue();
+       public function resetFoodBtn():void{
+            _model.resetFoodBtn();
        }
 
        public function startCo2():void{

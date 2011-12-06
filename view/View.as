@@ -19,7 +19,7 @@ import mvc.Model;
 		private var _model:Model;
 		private var _controller:Controller;
         private var respiratory:Resp;
-        private var gis:Gis;
+        private var digestive:Digestive;
         private var totalCo2Text:TextDisplay = new TextDisplay("0x0061a8",true,40,0);
         private var totalOxInBloodText:TextDisplay = new TextDisplay("0x0061a8",true,40,0);
 
@@ -43,8 +43,7 @@ import mvc.Model;
             respiratory  = new Resp(model,controller);
             weightNeedle= new WeightNeedle(model,controller);
            // foodBtn = new FoodBtn(model,controller);
-            gis = new Gis(model,controller);
-
+            digestive = new Digestive(model,controller);
 			init();
 		}
 		
@@ -64,13 +63,14 @@ import mvc.Model;
             _model.addEventListener(Model. OX_IN_CELL, oxInCell);
             _model.addEventListener(Model. FOOD_CELL, oxInCell);
 
+            // _model.addEventListener(Model.FOOD, addFood)
 		}
+
+
 
         private function creation (){
           addChild(bodySimBG);
           addChild(respiratory);
-          addChild(gis);
-
 
 
           totalOxInBloodText.x  = 1015;
@@ -93,8 +93,6 @@ import mvc.Model;
           glucoseText.y = 225;
           addChild(glucoseText);
 
-
-
           starchText.x  = -15;
           starchText.y = 285;
           addChild(starchText);
@@ -103,17 +101,13 @@ import mvc.Model;
         weightNeedle.y = 720;
         addChild(weightNeedle);
 
-
+        addChild(digestive);
        }
 
-//       function setTotalCo2(e:Event){
-//       totalCo2  = _model.totalCo2;
-//       //totalOxInBloodText
-//       totalCo2Text.theText = String(totalCo2);
-//       }
 
-        function oxInBlood(e:Event){
 
+
+       function oxInBlood(e:Event){
        totalOxInBloodText.theText = String(_model.bloodOxegenLevel);
        }
 

@@ -12,7 +12,7 @@ import mvc.Controller;
 	public class Gis extends MovieClip{
       private var _model:Model;
        private var _controller:Controller;
-      private var foodBtn:FoodBtn;
+     // private var foodBtn:FoodBtn;
 
        private var starchChain1:StarchChain = new StarchChain;
        private var starchChain2:StarchChain2 = new StarchChain2;
@@ -25,8 +25,8 @@ import mvc.Controller;
        private var protienChain1:ProtienChain1 = new ProtienChain1;
        private var protienChain2:ProtienChain2 = new ProtienChain2;
 
-       private var oxAniPosX:Number;
-       private var oxAniPosY:Number;
+       private var _posX:Number;
+       private var _posY:Number;
 
        private var cO2_1:CO2_1 = new CO2_1;
        private var cO2_1_5:cO2_last = new cO2_last;
@@ -64,16 +64,17 @@ import mvc.Controller;
         public function Gis(model:Model, controller:Controller){
             _model = model;
             _controller = controller;
-            foodBtn = new FoodBtn(model,controller);
-            oxAniPosX = _model.ResPosX ;
-            oxAniPosY = _model.ResPosY ;
+          //  foodBtn = new FoodBtn(model,controller);
+
+            _posX = _model.PosX ;
+            _posY = _model.PosY ;
             init();
 		}
 
     private function init():void{
 
         protienChain1.alpha = 0;
-        protienChain1.x = oxAniPosX - 660;
+        protienChain1.x = _posX - 660;
 
         addChild(protienChain1);
         protienChain1.addEventListener("end", protienChainEnd1);
@@ -82,58 +83,58 @@ import mvc.Controller;
 
 
         protienChain2.alpha = 0;
-        protienChain2.x = oxAniPosX - 660;
+        protienChain2.x = _posX - 660;
         addChild(protienChain2);
 
           cO2_1_5.addEventListener("end", protienChainEnd2);
-        cO2_1_5.x  = oxAniPosX;
-        cO2_1_5.y  = oxAniPosY;
+        cO2_1_5.x  = _posX;
+        cO2_1_5.y  = _posY;
         cO2_1_5.visible = false;
         addChild(cO2_1_5);
 
-        cO2_5inLung.x  = oxAniPosX;
-        cO2_5inLung.y  = oxAniPosY;
+        cO2_5inLung.x  = _posX;
+        cO2_5inLung.y  = _posY;
         cO2_5inLung.visible = false;
         addChild(cO2_5inLung);
 
-          cO2_5LeavingLung.x  = oxAniPosX;
-        cO2_5LeavingLung.y  = oxAniPosY;
+          cO2_5LeavingLung.x  = _posX;
+        cO2_5LeavingLung.y  = _posY;
         cO2_5LeavingLung.visible = false;
         addChild(cO2_5LeavingLung);
 
-        foodBtn.x = oxAniPosX - 1780;
-        foodBtn.y = oxAniPosY -30;
-        addChild(foodBtn);
+       // foodBtn.x = _posX - 1780;
+       // foodBtn.y = _posY -30;
+       // addChild(foodBtn);
+
+
 
              for(var i = 0; i<starchChainArray.length; i++){
-               starchChainArray[i].x = oxAniPosX - 660;
+               starchChainArray[i].x = _posX - 660;
                addChild(starchChainArray[i]);
                starchChainArray[i].alpha = 0;
              }
 
             for(var j = 0; j<6; j++){
-            cO2Array[j].x  = oxAniPosX ;
-            cO2Array[j].y  = oxAniPosY;
+            cO2Array[j].x  = _posX ;
+            cO2Array[j].y  = _posY;
 
             addChild(cO2Array[j]);
-            cO2inLungArray[j].x  = oxAniPosX;
-            cO2inLungArray[j].y  = oxAniPosY;
+            cO2inLungArray[j].x  = _posX;
+            cO2inLungArray[j].y  = _posY;
             cO2inLungArray[j].visible = false;
 
             addChild(cO2inLungArray[j]);
-            cO2LeavingLungArray[j].x = oxAniPosX;
-            cO2LeavingLungArray[j].y = oxAniPosY;
+            cO2LeavingLungArray[j].x = _posX;
+            cO2LeavingLungArray[j].y = _posY;
             cO2LeavingLungArray[j].visible = false;
 
             addChild(cO2LeavingLungArray[j]);}
-        _model.addEventListener(Model.FOOD, checkToAddFood)
+
 		    }
 
 
 
-        function checkToAddFood(e:Event){
-        addFood();
-        }
+
 
            function addFood(){
 
@@ -201,7 +202,7 @@ import mvc.Controller;
           starchChain5.alpha = 1;
           starchChain5.gotoAndPlay("one");
 
-            _controller.canAddFoodToTrue();
+
         }
 
         function starchChainEnd4(e:Event){
@@ -321,7 +322,7 @@ import mvc.Controller;
              _controller.subGlucose(1);
               starchChain5.alpha = 0;
           starchChain5.gotoAndStop("first");
-           trace("5end");
+           //trace("5end");
 
             cO2_1_5.visible = true;
             cO2_1_5.gotoAndPlay("one");
@@ -332,7 +333,7 @@ import mvc.Controller;
 
         function co2_5end(e:Event){
              _controller.co2OutBlood(1);
-                 trace("intering lungs");
+                 //trace("intering lungs");
                cO2_1_5.visible = false;
                cO2_5inLung.gotoAndPlay("one");
                cO2_5inLung.visible = true;
@@ -344,7 +345,7 @@ import mvc.Controller;
 
               function cO2_2_5inLungEnd(e:Event){
                 if(_model.breathInLungs == true){
-                      trace("leaving lungs");
+                      //trace("leaving lungs");
                      cO2_5inLung.visible = false;
                      cO2_5inLung.gotoAndStop("first");
                      cO2_5LeavingLung.gotoAndPlay("one");

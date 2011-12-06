@@ -16,8 +16,8 @@ public class Oxegen extends MovieClip {
        private var breathAni:BreathAni = new BreathAni;
        private var oxegenAni:OxegenAni = new OxegenAni;
        private var co2Amount:Number  = 10;
-       private var oxAniPosX:Number;
-       private var oxAniPosY:Number;
+       private var _posX:Number;
+       private var _posY:Number;
        private var _oxegenAmount:Number = 5;
        private var  oxegenAniStopped:Boolean = true;
        private var theOxegenAmout:Number  = 5;
@@ -25,8 +25,8 @@ public class Oxegen extends MovieClip {
 	public function Oxegen(model:Model, controller:Controller){
             _model = model;
             _controller = controller;
-             oxAniPosX = _model.ResPosX;
-             oxAniPosY = _model.ResPosY;
+             _posX = _model.PosX;
+             _posY = _model.PosY;
             init();
 		}
 
@@ -47,10 +47,10 @@ public class Oxegen extends MovieClip {
 
 
          private function initAni():void{
-            oxegenAni.x = oxAniPosX;
-            oxegenAni.y =  oxAniPosY;
-            breathAni.x = oxAniPosX;
-            breathAni.y = oxAniPosY;
+            oxegenAni.x = _posX;
+            oxegenAni.y =  _posY;
+            breathAni.x = _posX;
+            breathAni.y = _posY;
 
             addChild(oxegenAni);
             addChild(breathAni);
