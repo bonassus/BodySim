@@ -3,4 +3,8 @@
 *.iws
 *.iml
 *.ipr
+*jpg
+*png
+*psd
+*DS_Store
 .project
