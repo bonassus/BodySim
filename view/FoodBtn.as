@@ -52,6 +52,7 @@ public class FoodBtn extends MovieClip {
          }
 
          function feed(){
+             _controller.dialIncrement(10);
                  _controller.feedApple();
               _controller.resetFoodBtn();
           }
@@ -69,7 +70,7 @@ public class FoodBtn extends MovieClip {
         }
 
         function onAppleBack(){
-            trace("apple back");
+          //  trace("apple back");
             apple.addEventListener(MouseEvent.CLICK, onApple);
            TweenLite.to(apple,1,{alpha:1,ease:Quad.easeInOut});
         }

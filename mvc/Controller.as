@@ -22,15 +22,22 @@ package mvc
 
         public function breathInLungsTrue():void{
               _model.breathInLungs  = true;
+            _model.oxegenInLungs();
         }
 
         public function breathInLungsFalse():void{
               _model.breathInLungs  = false;
+            _model.oxegenOutLungs();
         }
 
         public function feedApple():void{
              _model.startFood();
+
         }
+
+        public function dialIncrement(amount:Number):void{
+            _model.setDialAmount(amount);
+         }
 
        public function resetFoodBtn():void{
             _model.resetFoodBtn();
@@ -42,7 +49,7 @@ package mvc
 
        public function oxegenInBlood():void{
 
-           _model.bloodOxegenLevel = 10 *(_sliderAmout+ 5);
+          _model.bloodOxegenLevel = 10 *(_sliderAmout+ 5);
            _model.oxegenInBlood();
        }
 
@@ -51,24 +58,39 @@ package mvc
            _model.oxegenOutBlood();
        }
 
-       public function setTotalCo2(amount:Number):void{
-           var quantity:Number;
+//       public function setTotalCo2(amount:Number):void{
+//           var quantity:Number;
+//
+//             quantity += amount;
+//           trace(quantity + "quantity");
+//            _model.totalCo2  = quantity;
+//       }
 
-             quantity += amount;
-           trace(quantity + "quantity");
-            _model.totalCo2  = quantity;
-       }
-
-       public function co2InBlood(amount:Number){
+        public function co2InLungs(amount:Number){
           _model.addToTotalCo2(amount);
           _model.upDateCo2R();
        }
 
-        public function co2OutBlood(amount:Number){
+        public function co2OutLungs(amount:Number){
          _model.subToTotalCo2(amount);
          _model.upDateCo2R();
 
        }
+
+//       public function setTotalCo2(amount:Number){
+//           _model.totalCo2 = amount;
+//       }
+
+//       public function co2InBlood(amount:Number){
+//          _model.addToTotalCo2(amount);
+//          _model.upDateCo2R();
+//       }
+//
+//        public function co2OutBlood(amount:Number){
+//         _model.subToTotalCo2(amount);
+//         _model.upDateCo2R();
+//
+//       }
 
         public function foodCell(){
          _model.foodCell();

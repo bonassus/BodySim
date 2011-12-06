@@ -30,12 +30,12 @@ public class WeightNeedle extends MovieClip{
       }
 
     function burrningCals(){
-      TweenLite.to(needle, 100,{rotation:-70})
+      TweenLite.to(needle, 500,{rotation:-70})
 
     }
 
     function fed(e:Event){
-     TweenLite.to(needle, 2,{rotation:70,onComplete:burrningCals})
+     TweenLite.to(needle, 2,{rotation:_model.dialAmount,onComplete:burrningCals})
     }
 }
 }

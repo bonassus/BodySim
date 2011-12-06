@@ -39,11 +39,16 @@ public class Oxegen extends MovieClip {
 
 			_model.addEventListener(Model.OXEGEN_AMOUNT, currOxegenAmoutHandler);
 
+
 		}
 
     private function currOxegenAmoutHandler(eve:Event):void{
              theOxegenAmout = _model.oxegenAmout;
             }
+
+    private function breathInLungsHandler(eve:Event):void{
+
+    }
 
 
          private function initAni():void{
@@ -72,7 +77,7 @@ public class Oxegen extends MovieClip {
                }
 
          function BreathOut(e:Event){
-                _controller.breathInLungsFalse();
+              _controller.breathInLungsFalse();
                }
 
 
@@ -83,6 +88,7 @@ public class Oxegen extends MovieClip {
 
                  setOxegenAmount();
                  _controller.oxegenInBlood();
+
 
                   oxegenAni.gotoAndPlay("one");
 
@@ -286,7 +292,7 @@ public class Oxegen extends MovieClip {
         function oxegenAniEnd(e:Event){
 
              oxegenAniStopped = true;
-            _controller.oxegenOutBlood();
+          //  _controller.oxegenOutBlood();
             _controller.startCo2();
         }
 

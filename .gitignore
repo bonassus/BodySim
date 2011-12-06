@@ -6,5 +6,8 @@
 *jpg
 *png
 *psd
+*p12
+*.apk
+*.xml
 *DS_Store
 .project

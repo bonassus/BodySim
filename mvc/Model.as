@@ -9,6 +9,7 @@ package mvc
 
 		public static const OXEGEN_AMOUNT:String = 'Oxegen_Amount';
         public static const BREATH_IN_LUNGS:String = 'BreathInLungs';
+        public static const BREATH_OUT_LUNGS:String = 'BreathoutLungs';
         public static const FOOD:String = 'Food';
         public static const RESET_FOOD = 'Reset_Food';
         public static const START_CO2 = 'Start_Co2';
@@ -27,11 +28,22 @@ package mvc
         private var  _breathInLungs:Boolean = false;
        // private var canAddFood:Boolean = true;
 
-        private var _totalCo2:Number = 0;
+        private var _totalCo2:Number = 10;
         private var _glucoseTotal:Number = 0;
         private var _starchTotal:Number = 0;
         private var _bloodOxegenLevel:Number;
+        private var _dialAmount:Number = 0;
 
+        public function get dialAmount():Number {
+            return _dialAmount;
+        }
+
+//        public function set dialAmount(value:Number):void {
+//            _dialAmount = value;
+//        }
+    public function setDialAmount(amount){
+         _dialAmount = _dialAmount + amount;
+    }
 
         public function get bloodOxegenLevel():Number {
             return _bloodOxegenLevel;
@@ -63,6 +75,9 @@ package mvc
        public function startCo2():void{
           dispatchEvent(new Event(START_CO2));
        }
+
+
+
        public function oxegenInBlood():void{
           dispatchEvent(new Event(OXEGEN_IN_BLOOD));
        }
@@ -82,9 +97,17 @@ package mvc
 
         public function set breathInLungs(value:Boolean):void {
             _breathInLungs = value;
-            dispatchEvent(new Event(BREATH_IN_LUNGS));
+
 
         }
+
+        public function oxegenInLungs():void {
+             dispatchEvent(new Event(BREATH_IN_LUNGS));
+        }
+        public function oxegenOutLungs():void {
+             dispatchEvent(new Event(BREATH_OUT_LUNGS));
+        }
+
 
         public function get PosX():Number {
             return _posX;
@@ -95,15 +118,30 @@ package mvc
         }
 
         public function addToTotalCo2(value:Number):void {
-           _totalCo2 = _totalCo2 + value;
+           _totalCo2 = _totalCo2 + (value * 10);
+           // trace(_totalCo2);
         }
 
         public function subToTotalCo2(value:Number):void {
-          _totalCo2 = _totalCo2 - value;
+          _totalCo2 = _totalCo2 - (value * 10);
+
         }
 
         public function get totalCo2():Number {
-            return _totalCo2 * 10;
+
+            if(_totalCo2 > 100){
+                _totalCo2 = 100;
+                return _totalCo2 ;
+            }else if(_totalCo2 < 10){
+                _totalCo2 = 10;
+                return _totalCo2 ;
+            }else{
+                return _totalCo2 ;
+            }
+
+
+
+
         }
 
         public function set totalCo2(value:Number):void {
@@ -113,9 +151,6 @@ package mvc
         public function upDateCo2R():void{
          dispatchEvent(new Event(CO2_UPDATE));
         }
-
-
-
 
 
         public function addGlucose(value:Number):void {
@@ -131,11 +166,8 @@ package mvc
         }
 
         public function get glucoseTotal():Number {
-            return _glucoseTotal* 20;
+            return _glucoseTotal* 2;
         }
-
-
-
 
         public function addStarch(value:Number):void {
            _starchTotal = _starchTotal + value;
@@ -150,7 +182,7 @@ package mvc
         }
 
         public function get starchTotal():Number {
-            return _starchTotal * 20;
+            return _starchTotal * 2;
         }
 
         public function oxInCell(){

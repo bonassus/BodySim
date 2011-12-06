@@ -206,7 +206,11 @@ import mvc.Controller;
         }
 
         function starchChainEnd4(e:Event){
-            _controller.co2InBlood(3);
+
+           // _controller.co2InBlood(3);
+
+
+
              _controller.subGlucose(4);
 
           starchChain4.alpha = 0;
@@ -226,8 +230,8 @@ import mvc.Controller;
 
 
        function protienChainEnd2(e:Event){
-           _controller.co2InBlood(3);
-
+         //  _controller.co2InBlood(3);
+           // _controller.co2InLungs(1);
             for(var j = 3; j<6; j++){
             cO2Array[j].play();
             cO2Array[j].visible = true;
@@ -237,7 +241,9 @@ import mvc.Controller;
          }
 
           function co2endP(e:Event){
-              _controller.co2OutBlood(3);
+            //  _controller.co2OutBlood(3);
+         _controller.co2InLungs(1);
+         //     _controller.co2OutLungs(1);
 
                for(var j = 3; j<6; j++){
                cO2Array[j].visible = false;
@@ -250,7 +256,9 @@ import mvc.Controller;
               }
 
               function cO2_2inLungEndP(e:Event){
+
                 if(_model.breathInLungs == true){
+                    _controller.co2OutLungs(1);
                     for(var j = 3; j<6; j++){
                      cO2inLungArray[j].visible = false;
                      cO2inLungArray[j].gotoAndStop("first");
@@ -275,7 +283,9 @@ import mvc.Controller;
 
 
         function co2end(e:Event){
-            _controller.co2OutBlood(3);
+           // _controller.co2OutBlood(3);
+
+            _controller.co2InLungs(1);
 
             canAddFood = false;
             for(var j = 0; j<3; j++){
@@ -290,6 +300,7 @@ import mvc.Controller;
            function cO2_2inLungEnd(e:Event){
 
              if(_model.breathInLungs == true){
+                 _controller.co2OutLungs(1);
                  for(var j = 0; j<3; j++){
                   cO2inLungArray[j].visible = false;
                   cO2inLungArray[j].gotoAndStop("first");
@@ -318,7 +329,10 @@ import mvc.Controller;
 //        }
 
          function starchChainEnd5(e:Event){
-             _controller.co2InBlood(1);
+            // _controller.co2InBlood(1);
+
+           //   _controller.co2InLungs(1);
+
              _controller.subGlucose(1);
               starchChain5.alpha = 0;
           starchChain5.gotoAndStop("first");
@@ -332,7 +346,9 @@ import mvc.Controller;
 
 
         function co2_5end(e:Event){
-             _controller.co2OutBlood(1);
+            // _controller.co2OutBlood(1);
+
+             _controller.co2InLungs(1);
                  //trace("intering lungs");
                cO2_1_5.visible = false;
                cO2_5inLung.gotoAndPlay("one");
@@ -344,13 +360,14 @@ import mvc.Controller;
               }
 
               function cO2_2_5inLungEnd(e:Event){
+
                 if(_model.breathInLungs == true){
-                      //trace("leaving lungs");
-                     cO2_5inLung.visible = false;
-                     cO2_5inLung.gotoAndStop("first");
-                     cO2_5LeavingLung.gotoAndPlay("one");
-                    cO2_5LeavingLung.visible = true;
-                    cO2_5LeavingLung.addEventListener("end2", cO2_2_5LeavingEnd);
+                   _controller.co2OutLungs(1);
+                   cO2_5inLung.visible = false;
+                   cO2_5inLung.gotoAndStop("first");
+                   cO2_5LeavingLung.gotoAndPlay("one");
+                   cO2_5LeavingLung.visible = true;
+                   cO2_5LeavingLung.addEventListener("end2", cO2_2_5LeavingEnd);
                    cO2_5inLung.removeEventListener("end2", cO2_2_5inLungEnd);
 
                }
